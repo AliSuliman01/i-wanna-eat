@@ -1,0 +1,24 @@
+{
+    "tables": [
+        {
+            "table_name": "region_translations",
+            "entity_name": "RegionTranslation",
+            "base_path": "General\\Regions\\RegionTranslations",
+            "operation": "crud",
+            "columns": [
+                {
+                    "type": "integer",
+                    "name": "region_id"
+                },
+                {
+                    "type": "integer",
+                    "name": "language_id"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                }
+            ]
+        }
+    ]
+}
