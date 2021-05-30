@@ -4,9 +4,9 @@
 namespace App\Http\Requests\General\Languages;
 
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\CustomFormRequest;
 
-class LanguageShowRequest extends FormRequest
+class LanguageShowRequest extends CustomFormRequest
 {
     public function authorize(): bool
     {

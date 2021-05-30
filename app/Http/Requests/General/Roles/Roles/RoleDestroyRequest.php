@@ -4,9 +4,10 @@
 namespace App\Http\Requests\General\Roles\Roles;
 
 
+use App\Http\Requests\CustomFormRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoleDestroyRequest extends FormRequest
+class RoleDestroyRequest extends CustomFormRequest
 {
     public function authorize(): bool
     {

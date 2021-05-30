@@ -4,9 +4,10 @@
 namespace App\Http\Requests\General\Users\Auth;
 
 
+use App\Http\Requests\CustomFormRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class LoginRequest extends CustomFormRequest
 {
     public function authorize(): bool
     {

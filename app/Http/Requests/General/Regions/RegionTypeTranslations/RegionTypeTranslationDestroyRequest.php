@@ -4,9 +4,10 @@
 namespace App\Http\Requests\General\Regions\RegionTypeTranslations;
 
 
+use App\Http\Requests\CustomFormRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegionTypeTranslationDestroyRequest extends FormRequest
+class RegionTypeTranslationDestroyRequest extends CustomFormRequest
 {
     public function authorize(): bool
     {

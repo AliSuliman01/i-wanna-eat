@@ -4,9 +4,9 @@
 namespace App\Http\Requests\General\Regions\Regions;
 
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\CustomFormRequest;
 
-class RegionShowRequest extends FormRequest
+class RegionShowRequest extends CustomFormRequest
 {
     public function authorize(): bool
     {

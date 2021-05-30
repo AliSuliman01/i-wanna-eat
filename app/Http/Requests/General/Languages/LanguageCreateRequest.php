@@ -4,9 +4,9 @@
 namespace App\Http\Requests\General\Languages;
 
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\CustomFormRequest;
 
-class LanguageCreateRequest extends FormRequest
+class LanguageCreateRequest extends CustomFormRequest
 {
     public function authorize(): bool
     {
@@ -18,7 +18,7 @@ class LanguageCreateRequest extends FormRequest
         return [
             'name' 					=> '' ,
 			'abbrev' 					=> '' ,
-			
+
         ];
     }
 

@@ -4,9 +4,9 @@
 namespace App\Http\Requests\General\Languages;
 
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\CustomFormRequest;
 
-class LanguageUpdateRequest extends FormRequest
+class LanguageUpdateRequest extends CustomFormRequest
 {
     public function authorize(): bool
     {
@@ -19,7 +19,7 @@ class LanguageUpdateRequest extends FormRequest
             'id' => 'required|exists:languages,id,deleted_at,NULL',
             'name' 					=> '' ,
 			'abbrev' 					=> '' ,
-			
+
         ];
     }
 

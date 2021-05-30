@@ -4,9 +4,10 @@
 namespace App\Http\Requests\General\Roles\Roles;
 
 
+use App\Http\Requests\CustomFormRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoleUpdateRequest extends FormRequest
+class RoleUpdateRequest extends CustomFormRequest
 {
     public function authorize(): bool
     {
@@ -33,7 +34,7 @@ class RoleUpdateRequest extends FormRequest
 			'id' 					=> '' ,
 			'name' 					=> '' ,
 			'description' 					=> '' ,
-			
+
         ];
     }
 

@@ -4,9 +4,9 @@
 namespace App\Http\Requests\General\Regions\Regions;
 
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\CustomFormRequest;
 
-class RegionCreateRequest extends FormRequest
+class RegionCreateRequest extends CustomFormRequest
 {
     public function authorize(): bool
     {
@@ -18,7 +18,7 @@ class RegionCreateRequest extends FormRequest
         return [
             'region_type_id' 					=> '' ,
 			'parent_region_id' 					=> '' ,
-			
+
         ];
     }
 

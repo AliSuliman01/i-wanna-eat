@@ -19,6 +19,35 @@ class AuthController extends Controller
         $userDTO = UserDTO::fromRequest($loginRequest->validated());
         return response()->json(Helpers::createSuccessResponse(LoginAction::execute($userDTO)));
     }
+    /**
+     * @OA\Post(
+     *      path="/api/auth/signup",
+     *      operationId="SignupUser",
+     *      tags={"auth"},
+     *      summary="Signup using email and password",
+     *      description="fill all feilds for better experience ",
+     *     @OA\RequestBody(
+     *     required=true,
+     *     @OA\JsonContent(
+     *     required={"email","password"},
+     *     @OA\Property(property="username",type="string",format="email",example="user@example.com"),
+     *     @OA\Property(property="email",type="string",format="email",example="user@example.com"),
+     *     @OA\Property(property="password",type="string",format="password",example="PassWord12345"),
+     *     @OA\Property(property="mobile_number",type="string"),
+     *     )
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation"
+     *       ),
+     *       @OA\Response(response=400, description="Bad request"),
+     *       security={
+     *           {"api_key_security_example": {}}
+     *       }
+     *     )
+     *
+     * Returns list of projects
+     */
     public function signup(SignupRequest $signupRequest){
         $userDTO = UserDTO::fromRequest($signupRequest->validated());
         return response()->json(Helpers::createSuccessResponse(SignupAction::execute($userDTO)));

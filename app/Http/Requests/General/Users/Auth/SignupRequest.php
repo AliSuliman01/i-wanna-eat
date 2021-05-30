@@ -4,9 +4,9 @@
 namespace App\Http\Requests\General\Users\Auth;
 
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\CustomFormRequest;
 
-class SignupRequest extends FormRequest
+class SignupRequest extends CustomFormRequest
 {
     public function authorize(): bool
     {
@@ -17,8 +17,8 @@ class SignupRequest extends FormRequest
     {
         return [
             'email' 					=> 'required|unique:users,email,NULL,id,deleted_at,NULL' ,
-            'username' 					=> 'required|unique:users,username,NULL,id,deleted_at,NULL' ,
-            'mobile_number' 			=> 'required|unique:users,mobile_number,NULL,id,deleted_at,NULL' ,
+            'username' 					=> 'nullable|unique:users,username,NULL,id,deleted_at,NULL' ,
+            'mobile_number' 			=> 'nullable|unique:users,mobile_number,NULL,id,deleted_at,NULL' ,
             'password' 					=> 'required|min:8' ,
             'region_id'                 => 'nullable|exists:regions,id,deleted_at,NULL'
         ];

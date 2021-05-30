@@ -1,36 +1,56 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "L5 OpenApi",
+        "title": "Wanna Eat API",
         "description": "L5 Swagger OpenApi description",
         "contact": {
-            "email": "darius@matulionis.lt"
-        },
-        "license": {
-            "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+            "email": "alisulimanq@gmail.com"
         },
         "version": "1.0.0"
     },
-    "servers": [
-        {
-            "url": "127.0.0.1",
-            "description": "L5 Swagger OpenApi dynamic host server"
-        },
-        {
-            "url": "https://projects.dev/api/v1",
-            "description": "L5 Swagger OpenApi Server"
-        }
-    ],
     "paths": {
-        "/projects": {
-            "get": {
+        "/api/auth/signup": {
+            "post": {
                 "tags": [
-                    "Projects"
+                    "auth"
                 ],
-                "summary": "Get list of projects",
-                "description": "Returns list of projects",
-                "operationId": "getProjectsList",
+                "summary": "Signup using email and password",
+                "description": "fill all feilds for better experience ",
+                "operationId": "SignupUser",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    },
+                                    "mobile_number": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "successful operation"
@@ -46,42 +66,94 @@
                 ]
             }
         },
-        "/projects/{id}": {
+        "/api/users": {
             "get": {
                 "tags": [
-                    "Projects"
+                    "users"
                 ],
-                "summary": "Get project information",
-                "description": "Returns project data",
-                "operationId": "getProjectById",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Project id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
+                "summary": "Get list of users",
+                "description": "Returns list of users",
+                "operationId": "getUsersList",
                 "responses": {
                     "200": {
                         "description": "successful operation"
                     },
                     "400": {
                         "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 },
                 "security": [
                     {
-                        "oauth2_security_example": [
-                            "write:projects",
-                            "read:projects"
-                        ]
+                        "api_key_security_example": []
+                    }
+                ]
+            }
+        },
+        "/api/users/show/{id}": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get one user",
+                "description": "Returns one user",
+                "operationId": "getUser",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key_security_example": []
+                    }
+                ]
+            }
+        },
+        "/api/users/update": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "update user",
+                "description": "update user",
+                "operationId": "UpdateUser",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key_security_example": []
+                    }
+                ]
+            }
+        },
+        "/api/users/destroy": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "destroy user",
+                "description": "destroy user",
+                "operationId": "DestroyUser",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key_security_example": []
                     }
                 ]
             }
@@ -107,24 +179,6 @@
     },
     "security": [
         []
-    ],
-    "tags": [
-        {
-            "name": "project",
-            "description": "Everything about your Projects",
-            "externalDocs": {
-                "description": "Find out more",
-                "url": "http://swagger.io"
-            }
-        },
-        {
-            "name": "user",
-            "description": "Operations about user",
-            "externalDocs": {
-                "description": "Find out more about",
-                "url": "http://swagger.io"
-            }
-        }
     ],
     "externalDocs": {
         "description": "Find out more about Swagger",

@@ -4,9 +4,10 @@
 namespace App\Http\Requests\General\Users\Users;
 
 
+use App\Http\Requests\CustomFormRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserDestroyRequest extends FormRequest
+class UserDestroyRequest extends CustomFormRequest
 {
     public function authorize(): bool
     {

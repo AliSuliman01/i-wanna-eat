@@ -4,9 +4,10 @@
 namespace App\Http\Requests\General\Regions\RegionTypes;
 
 
+use App\Http\Requests\CustomFormRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegionTypeUpdateRequest extends FormRequest
+class RegionTypeUpdateRequest extends CustomFormRequest
 {
     public function authorize(): bool
     {
@@ -17,7 +18,7 @@ class RegionTypeUpdateRequest extends FormRequest
     {
         return [
             'id' => 'required|exists:region_types,id,deleted_at,NULL',
-            
+
         ];
     }
 

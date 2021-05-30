@@ -4,9 +4,10 @@
 namespace App\Http\Requests\General\Regions\RegionTranslations;
 
 
+use App\Http\Requests\CustomFormRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegionTranslationUpdateRequest extends FormRequest
+class RegionTranslationUpdateRequest extends CustomFormRequest
 {
     public function authorize(): bool
     {
@@ -20,7 +21,7 @@ class RegionTranslationUpdateRequest extends FormRequest
             'region_id' 					=> '' ,
 			'language_id' 					=> '' ,
 			'name' 					=> '' ,
-			
+
         ];
     }
 

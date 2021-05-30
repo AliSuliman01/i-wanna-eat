@@ -20,13 +20,49 @@ use App\Http\ViewModels\General\Users\Users\UserIndexVM;
 
 class UserController extends Controller
 {
-
+    /**
+     * @OA\Get(
+     *      path="/api/users",
+     *      operationId="getUsersList",
+     *      tags={"users"},
+     *      summary="Get list of users",
+     *      description="Returns list of users",
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation"
+     *       ),
+     *       @OA\Response(response=400, description="Bad request"),
+     *       security={
+     *           {"api_key_security_example": {}}
+     *       }
+     *     )
+     *
+     * Returns list of projects
+     */
     public function index(){
         $class = "App\Http\ViewModels\General\Users\Users\UserIndexVM";
 
         return response()->json(Helpers::createSuccessResponse((new $class())->toArray()));
     }
-
+    /**
+     * @OA\Get(
+     *      path="/api/users/show/{id}",
+     *      operationId="getUser",
+     *      tags={"users"},
+     *      summary="Get one user",
+     *      description="Returns one user",
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation"
+     *       ),
+     *       @OA\Response(response=400, description="Bad request"),
+     *       security={
+     *           {"api_key_security_example": {}}
+     *       }
+     *     )
+     *
+     * Returns list of projects
+     */
     public function show(UserShowRequest $userShowRequest){
 
         return response()->json(Helpers::createSuccessResponse((new UserShowVM($userShowRequest->route('id')))->toArray()));
@@ -45,7 +81,25 @@ class UserController extends Controller
 
         return response()->json($response);
     }
-
+    /**
+     * @OA\Post(
+     *      path="/api/users/update",
+     *      operationId="UpdateUser",
+     *      tags={"users"},
+     *      summary="update user",
+     *      description="update user",
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation"
+     *       ),
+     *       @OA\Response(response=400, description="Bad request"),
+     *       security={
+     *           {"api_key_security_example": {}}
+     *       }
+     *     )
+     *
+     * Update User
+     */
     public function update(UserUpdateRequest $userUpdateRequest){
         $data = $userUpdateRequest->validated() ;
 
@@ -59,7 +113,25 @@ class UserController extends Controller
 
         return response()->json($response);
     }
-
+    /**
+     * @OA\Post(
+     *      path="/api/users/destroy",
+     *      operationId="DestroyUser",
+     *      tags={"users"},
+     *      summary="destroy user",
+     *      description="destroy user",
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation"
+     *       ),
+     *       @OA\Response(response=400, description="Bad request"),
+     *       security={
+     *           {"api_key_security_example": {}}
+     *       }
+     *     )
+     *
+     * Destroy User
+     */
     public function destroy(UserDestroyRequest $userDestroyRequest){
 
         return response()->json(Helpers::createSuccessResponse(UserDestroyAction::execute(UserDTO::fromRequest($userDestroyRequest->validated()))));

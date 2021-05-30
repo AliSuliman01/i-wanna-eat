@@ -1,0 +1,13 @@
+
+Warning: Undefined array key "host" in C:\Work\project\API\RestaurantsProject\api\i-wanna-eat\config\database.php on line 70
+
+Warning: Undefined array key "port" in C:\Work\project\API\RestaurantsProject\api\i-wanna-eat\config\database.php on line 71
+
+Warning: Undefined array key "user" in C:\Work\project\API\RestaurantsProject\api\i-wanna-eat\config\database.php on line 73
+
+Warning: Undefined array key "pass" in C:\Work\project\API\RestaurantsProject\api\i-wanna-eat\config\database.php on line 74
+
+                                                                     
+  There are no commands defined in the "laravel-swagger" namespace.  
+                                                                     
+
