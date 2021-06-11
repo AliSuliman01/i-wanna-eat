@@ -1,9 +1,9 @@
 {
     "tables": [
         {
-            "table_name": "region_translations",
-            "entity_name": "RegionTranslation",
-            "base_path": "General\\Regions\\RegionTranslations",
+            "table_name": "restaurants",
+            "entity_name": "Restaurant",
+            "base_path": "Content\\Restaurants\\Restaurants",
             "operation": "crud",
             "columns": [
                 {
@@ -11,12 +11,28 @@
                     "name": "region_id"
                 },
                 {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
                     "type": "integer",
-                    "name": "language_id"
+                    "name": "stars"
+                },
+                {
+                    "type": "integer",
+                    "name": "is_validated_from_us"
                 },
                 {
                     "type": "string",
-                    "name": "name"
+                    "name": "open_at"
+                },
+                {
+                    "type": "string",
+                    "name": "close_at"
+                },
+                {
+                    "type": "integer",
+                    "name": "has_family_section"
                 }
             ]
         }

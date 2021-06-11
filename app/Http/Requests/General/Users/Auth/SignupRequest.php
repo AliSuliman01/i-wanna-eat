@@ -8,10 +8,6 @@ use App\Http\Requests\CustomFormRequest;
 
 class SignupRequest extends CustomFormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
 
     public function rules(): array
     {
@@ -24,8 +20,5 @@ class SignupRequest extends CustomFormRequest
         ];
     }
 
-    public function validationData(): array
-    {
-        return $this->json()->all();
-    }
+
 }

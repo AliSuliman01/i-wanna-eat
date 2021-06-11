@@ -5,15 +5,9 @@ namespace App\Http\Requests\General\Users\Auth;
 
 
 use App\Http\Requests\CustomFormRequest;
-use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends CustomFormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [
@@ -22,10 +16,5 @@ class LoginRequest extends CustomFormRequest
             'mobile_number' => 'required_without_all:email,username|exists:users,mobile_number,deleted_at,NULL',
             'password' => 'required|string|min:8',
         ];
-    }
-
-    public function validationData(): array
-    {
-        return $this->json()->all();
     }
 }
