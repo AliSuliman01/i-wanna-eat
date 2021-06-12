@@ -26,33 +26,31 @@ class RegionTypeController extends Controller
     }
 
     public function show(RegionTypeShowRequest $regionTypeShowRequest){
-      
+
         return response()->json(Helpers::createSuccessResponse((new RegionTypeShowVM($regionTypeShowRequest->route('id')))->toArray()));
     }
 
     public function create(RegionTypeCreateRequest $regionTypeCreateRequest){
         $data = $regionTypeCreateRequest->validated() ;
 
-        $regionTypeDTO = RegionTypeDTO::fromRequest($data);
-        
-        $regionType = RegionTypeCreateAction::execute($regionTypeDTO);
+        $regionType = RegionTypeCreateAction::execute(RegionTypeDTO::fromRequest($data));
 
-        $regionType = new RegionTypeShowVM($regionType->id);
+        foreach ($data['translations'] as $translation) {
+            $regionType->translations()->attach($translation['language_id'],$translation);
+        }
 
-        $response = Helpers::createSuccessResponse($regionType->toArray());
-
-        return response()->json($response);
+        return response()->json(Helpers::createSuccessResponse((new RegionTypeShowVM($regionType->id))->toArray()));
     }
 
     public function update(RegionTypeUpdateRequest $regionTypeUpdateRequest){
         $data = $regionTypeUpdateRequest->validated() ;
 
         $regionTypeDTO = RegionTypeDTO::fromRequest($data);
-        
+
         $regionType = RegionTypeUpdateAction::execute($regionTypeDTO);
 
         $regionType = new RegionTypeShowVM($regionType->id);
-        
+
         $response = Helpers::createSuccessResponse($regionType->toArray());
 
         return response()->json($response);

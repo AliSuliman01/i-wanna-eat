@@ -3,6 +3,7 @@
 namespace App\Domain\General\Regions\RegionTypes\Model;
 
 use App\Domain\General\Languages\Model\Language;
+use App\Domain\General\Regions\RegionTypeTranslations\Model\RegionTypeTranslation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -29,6 +30,8 @@ class RegionType extends Model
 
 
     public function translations(){
-        return $this->belongsToMany(Language::class,'region_type_translations');
+        return $this->belongsToMany(Language::class,'region_type_translations')
+            ->using(RegionTypeTranslation::class)
+            ->withPivot(['name']);
     }
 }

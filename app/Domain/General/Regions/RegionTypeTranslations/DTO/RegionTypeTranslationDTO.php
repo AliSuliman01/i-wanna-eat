@@ -16,13 +16,6 @@ public $region_type_id;
 public $language_id;
 	/* @var string|null */
 public $name;
-	
-    /* @var integer|null */
-    public $created_by_user_id;
-    /* @var integer|null */
-    public $updated_by_user_id;
-    /* @var integer|null */
-    public $deleted_by_user_id;
     public static function fromRequest($request)
     {
         return new self([
@@ -30,10 +23,6 @@ public $name;
             'region_type_id' 					=> $request['region_type_id'] ?? null ,
 			'language_id' 					=> $request['language_id'] ?? null ,
 			'name' 					=> $request['name'] ?? null ,
-			
-            'created_by_user_id' 					=> $request['created_by_user_id'] ?? null ,
-			'updated_by_user_id' 					=> $request['updated_by_user_id'] ?? null ,
-			'deleted_by_user_id' 					=> $request['deleted_by_user_id'] ?? null ,
 
         ]);
     }

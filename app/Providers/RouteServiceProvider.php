@@ -74,8 +74,34 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path($path.'/Users/users.php'));
     }
+    public function mapRegionsRoutes($path){
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/Regions/regions.php'));
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/RegionTranslations/region_translations.php'));
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/RegionTypes/region_types.php'));
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/RegionTypeTranslations/region_type_translations.php'));
+    }
     public function mapGeneralRoutes($path){
         $this->mapUsersRoutes($path.'/Users');
+        $this->mapLanguagesRoutes($path.'/Languages');
+        $this->mapRegionsRoutes($path.'/Regions');
+    }
+    public function mapLanguagesRoutes($path){
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/languages.php'));
     }
     public function mapWebRoutes($path){
 

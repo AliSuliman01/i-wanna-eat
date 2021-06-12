@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['namespace' => 'App\Http\Controllers\General\Regions\RegionTypes', 'prefix' => 'region_types'],
+Route::group(['namespace' => 'General\Regions\RegionTypes', 'prefix' => 'region_types'],
 	function () {
 		Route::get('', 'RegionTypeController@index');
 		Route::get('show/{id}', 'RegionTypeController@show');

@@ -33,13 +33,6 @@ class UserDTO extends DataTransferObject
     public $email_verified_at;
     /* @var string|null */
     public $password_reset_at;
-    /* @var integer|null */
-    public $created_by_user_id;
-    /* @var integer|null */
-    public $updated_by_user_id;
-    /* @var integer|null */
-    public $deleted_by_user_id;
-
 
     public static function fromRequest($request)
     {
@@ -56,9 +49,6 @@ class UserDTO extends DataTransferObject
             'reset_password_token' => $request['reset_password_token'] ?? null,
             'email_verified_at' => $request['email_verified_at'] ?? null,
             'password_reset_at' => $request['password_reset_at'] ?? null,
-            'created_by_user_id' => $request['created_by_user_id'] ?? null,
-            'updated_by_user_id' => $request['updated_by_user_id'] ?? null,
-            'deleted_by_user_id' => $request['deleted_by_user_id'] ?? null,
         ]);
     }
 }

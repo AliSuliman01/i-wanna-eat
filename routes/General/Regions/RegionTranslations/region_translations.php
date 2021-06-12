@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['namespace' => 'App\Http\Controllers\General\Regions\RegionTranslations', 'prefix' => 'region_translations'],
+Route::group(['namespace' => 'General\Regions\RegionTranslations', 'prefix' => 'region_translations'],
 	function () {
 		Route::get('', 'RegionTranslationController@index');
 		Route::get('show/{id}', 'RegionTranslationController@show');

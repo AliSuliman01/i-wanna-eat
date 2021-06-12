@@ -18,7 +18,7 @@ class RegionTypeShowVM implements Arrayable
     }
 
     private function get_RegionType(){
-        return RegionType::find($this->regionTypeId);
+        return RegionType::with('translations')->find($this->regionTypeId);
     }
     public function toArray(): array
     {

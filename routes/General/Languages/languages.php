@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['namespace' => 'App\Http\Controllers\General\Languages', 'prefix' => 'languages'],
+Route::group(['namespace' => 'General\Languages', 'prefix' => 'languages'],
 	function () {
 		Route::get('', 'LanguageController@index');
 		Route::get('show/{id}', 'LanguageController@show');

@@ -1,0 +1,577 @@
+{
+	"info": {
+		"_postman_id": "d3d6123f-6c02-423e-907c-8fb96945b390",
+		"name": "My Application 12-6-2021",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "General",
+			"item": [
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "Auth",
+							"item": [
+								{
+									"name": "sign up",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"email\": \"base_user1@test.com\",\r\n    \"username\": \"base_user1\",\r\n    \"mobile_number\": \"123456789\",\r\n    \"password\": \"12345678\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{remote_url}}/api/auth/signup",
+											"host": [
+												"{{remote_url}}"
+											],
+											"path": [
+												"api",
+												"auth",
+												"signup"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "login",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"email\": \"base_user@test.com\",\r\n    \"password\": \"12345678\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{backend_url}}/api/auth/login",
+											"host": [
+												"{{backend_url}}"
+											],
+											"path": [
+												"api",
+												"auth",
+												"login"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Users",
+							"item": [
+								{
+									"name": "index",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{backend_url}}/api/users",
+											"host": [
+												"{{backend_url}}"
+											],
+											"path": [
+												"api",
+												"users"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "show",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{backend_url}}/api/users/show/2",
+											"host": [
+												"{{backend_url}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"show",
+												"2"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "destroy",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{backend_url}}/api/users/destroy",
+											"host": [
+												"{{backend_url}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"destroy"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "update",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{backend_url}}/api/users/update",
+											"host": [
+												"{{backend_url}}"
+											],
+											"path": [
+												"api",
+												"users",
+												"update"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Regions",
+					"item": [
+						{
+							"name": "Regions",
+							"item": [
+								{
+									"name": "index",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{backend_url}}/api/regions",
+											"host": [
+												"{{backend_url}}"
+											],
+											"path": [
+												"api",
+												"regions"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "show",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{backend_url}}/api/regions/show/1",
+											"host": [
+												"{{backend_url}}"
+											],
+											"path": [
+												"api",
+												"regions",
+												"show",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "create",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"region_type_id\":,\r\n    \"region_translations\":[\r\n        \r\n    ]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{backend_url}}/api/regions/create",
+											"host": [
+												"{{backend_url}}"
+											],
+											"path": [
+												"api",
+												"regions",
+												"create"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "update",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{backend_url}}/api/regions/update",
+											"host": [
+												"{{backend_url}}"
+											],
+											"path": [
+												"api",
+												"regions",
+												"update"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "destroy",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{backend_url}}/api/regions/destroy",
+											"host": [
+												"{{backend_url}}"
+											],
+											"path": [
+												"api",
+												"regions",
+												"destroy"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Regions Types",
+							"item": [
+								{
+									"name": "index",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{backend_url}}/api/region_types",
+											"host": [
+												"{{backend_url}}"
+											],
+											"path": [
+												"api",
+												"region_types"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "show",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{backend_url}}/api/region_types/show/1",
+											"host": [
+												"{{backend_url}}"
+											],
+											"path": [
+												"api",
+												"region_types",
+												"show",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "create",
+									"request": {
+										"auth": {
+											"type": "oauth2",
+											"oauth2": [
+												{
+													"key": "tokenType",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "tokenName",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "headerPrefix",
+													"value": "Bearer",
+													"type": "string"
+												},
+												{
+													"key": "addTokenTo",
+													"value": "header",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"translations\":[\r\n        {\r\n            \"language_id\":1,\r\n            \"name\":\"دولة\"\r\n        },\r\n        {\r\n            \"language_id\":2,\r\n            \"name\":\"country\"\r\n        }\r\n    ]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{backend_url}}/api/region_types/create",
+											"host": [
+												"{{backend_url}}"
+											],
+											"path": [
+												"api",
+												"region_types",
+												"create"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "update",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{backend_url}}/api/region_types/update",
+											"host": [
+												"{{backend_url}}"
+											],
+											"path": [
+												"api",
+												"region_types",
+												"update"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "destroy",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{backend_url}}/api/region_types/destroy",
+											"host": [
+												"{{backend_url}}"
+											],
+											"path": [
+												"api",
+												"region_types",
+												"destroy"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Languages",
+					"item": [
+						{
+							"name": "index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{backend_url}}/api/languages",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"languages"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{backend_url}}/api/languages/show/1",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"languages",
+										"show",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "tokenType",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "tokenName",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "headerPrefix",
+											"value": "Bearer",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"english\",\r\n    \"abbrev\": \"EN\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{backend_url}}/api/languages/create",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"languages",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{backend_url}}/api/languages/update",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"languages",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "destroy",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{backend_url}}/api/languages/destory",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"languages",
+										"destory"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "backend_url",
+			"value": "http://127.0.0.1:8001"
+		},
+		{
+			"key": "local_user_token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNWFhYzRhYzYwZDk2MjJlM2ZmZjZhZjY2OWM4NmMzOTNkN2I0M2FlOWJiMzUxM2FiMmI0MTQ4ZDJlZTJlMmFiMzE3OTM5OTY5Y2RhZTBhNjYiLCJpYXQiOjE2MjM0NzI4NTIuMzU3ODE4LCJuYmYiOjE2MjM0NzI4NTIuMzU3ODI5LCJleHAiOjE2NTUwMDg4NTEuODg5NDIyLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.UVjnOwJy0XqClFzznTdbXmmvSy_OCpnTA_d6ZN232xalwUBDigN-qxkzwN53rLsdz7nkrU5EgTvoWIuwCrMIu9wkUoPlysEBMgP1vIlwo_vdRo6-TgkGQLuPXmS5O_UVmUEE1A5F86o0WyydEbLHa8z7iv7Xpq7LmPtVbklkrvBRYZSzoolRItWgrFRKq6Q2RHlR0sJbmTUXZk0dBGWwENokT6oT_dyitXdUeUT0C0LYsT5YVtEqxVSuDnCo_IMyHpJqf-MH1-Nv8JvJNv2oZPK5UsPtqt2YC8mNeDB2FZGv-QGJy1YmPWamP4ytu54gUfncGl8-QDl1A8QksRw6JnNrtCf9GfHRud6nsTO1c9M5g0XgQI6h42oKHBW-JMVCtHHFDOFznFQikfHFuQ77ZM6gDdChrwzHnE2cTAvmSJyf3XBNBRpg2Zory9dWFP_kY5Z5ciDiNBh2j0seWyC2NVo5-NMM7nKHsQGqfBhirputz-FfdIvwVJwMFw_nqh9iwp2H5wDnrqjoEjT7o_VXUrmPrU6R4zlpN3K4A7U-uXBm_TBinCbBQDGFqwf8xc4qFSuEBadb6NO_HNdAl7bVHdm7llBKQF5xjoqO3wOnGzBlSiwMrEU1JUwh7e8vTVRjwCck1jKV9hAZuGbIlRO4DZEOrSiixrdoBHBL4zwyiwo"
+		},
+		{
+			"key": "remote_url",
+			"value": "https://i-wanna-eat.herokuapp.com"
+		}
+	]
+}

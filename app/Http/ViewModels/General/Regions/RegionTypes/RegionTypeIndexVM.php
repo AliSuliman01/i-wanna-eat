@@ -10,7 +10,7 @@ class RegionTypeIndexVM implements Arrayable
 {
 
     public function get_region_types(){
-    	return RegionType::all();
+    	return RegionType::with('translations')->get();
 	}
     public function toArray(): array
     {

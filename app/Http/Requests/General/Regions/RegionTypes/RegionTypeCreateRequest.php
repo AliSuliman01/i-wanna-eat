@@ -17,7 +17,9 @@ class RegionTypeCreateRequest extends CustomFormRequest
     public function rules(): array
     {
         return [
-
+            'translations' => 'array|required',
+            'translations.*.language_id' => 'required|exists:languages,id,deleted_at,NULL',
+            'translations.*.name' => 'required|unique:region_type_translations,name,NULL,id,deleted_at,NULL'
         ];
     }
 
