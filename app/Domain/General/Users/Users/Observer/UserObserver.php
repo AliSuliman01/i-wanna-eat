@@ -17,8 +17,6 @@ class UserObserver
      */
     public function created(User $user)
     {
-        $user->created_by_user_id = Auth::id();
-        $user->save();
     }
 
     /**
@@ -29,8 +27,6 @@ class UserObserver
      */
     public function updated(User $user)
     {
-        $user->updated_by_user_id = Auth::id();
-        $user->save();
     }
 
     /**
@@ -41,8 +37,6 @@ class UserObserver
      */
     public function deleted(User $user)
     {
-        $user->deleted_by_user_id = Auth::id();
-        $user->save();
     }
 
     /**
