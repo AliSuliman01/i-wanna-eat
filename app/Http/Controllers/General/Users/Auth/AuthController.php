@@ -15,40 +15,56 @@ use App\Http\Requests\General\Users\Auth\SignupRequest;
 class AuthController extends Controller
 {
 
-    public function login(LoginRequest $loginRequest){
+    public function login(LoginRequest $loginRequest)
+    {
         $userDTO = UserDTO::fromRequest($loginRequest->validated());
         return response()->json(Helpers::createSuccessResponse(LoginAction::execute($userDTO)));
     }
+
     /**
      * @OA\Post(
      *      path="/api/auth/signup",
      *      operationId="SignupUser",
      *      tags={"auth"},
      *      summary="Signup using email and password",
-     *      description="fill all feilds for better experience ",
      *     @OA\RequestBody(
      *     required=true,
      *     @OA\JsonContent(
      *     required={"email","password"},
-     *     @OA\Property(property="username",type="string",format="email",example="user@example.com"),
+     *     @OA\Property(property="username",type="string",example="john lay"),
      *     @OA\Property(property="email",type="string",format="email",example="user@example.com"),
      *     @OA\Property(property="password",type="string",format="password",example="PassWord12345"),
-     *     @OA\Property(property="mobile_number",type="string"),
+     *     @OA\Property(property="mobile_number",type="string", example="0987654321"),
      *     )
      *     ),
      *      @OA\Response(
      *          response=200,
-     *          description="successful operation"
-     *       ),
-     *       @OA\Response(response=400, description="Bad request"),
-     *       security={
-     *           {"api_key_security_example": {}}
-     *       }
+     *          description="successful",
+     *     @OA\JsonContent(
+     *          @OA\Property (property="isSuccessful",type="boolean",example="true"),
+     *          @OA\Property (property="hasContent",type="boolean",example="true"),
+     *          @OA\Property (property="code",type="integer",example="200"),
+     *          @OA\Property (property="message",type="string",example=""),
+     *          @OA\Property (property="data" ,type="object", ref="#/components/schemas/User")
+     *       )
+     * ),
+     *       @OA\Response(
+     *          response=400,
+     *          description="validation error",
+     *          @OA\JsonContent(
+     *          @OA\Property (property="isSuccessful",type="boolean",example="false"),
+     *          @OA\Property (property="hasContent",type="boolean",example="false"),
+     *          @OA\Property (property="code",type="integer",example="400"),
+     *          @OA\Property (property="message",type="string",example="The email has already been taken."),
+     *          @OA\Property (property="data" ,type="object", example="null")
+     *          )
+     *      )
      *     )
      *
      * Returns list of projects
      */
-    public function signup(SignupRequest $signupRequest){
+    public function signup(SignupRequest $signupRequest)
+    {
         $userDTO = UserDTO::fromRequest($signupRequest->validated());
         return response()->json(Helpers::createSuccessResponse(SignupAction::execute($userDTO)));
     }

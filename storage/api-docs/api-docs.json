@@ -15,7 +15,6 @@
                     "auth"
                 ],
                 "summary": "Signup using email and password",
-                "description": "fill all feilds for better experience ",
                 "operationId": "SignupUser",
                 "requestBody": {
                     "required": true,
@@ -29,8 +28,7 @@
                                 "properties": {
                                     "username": {
                                         "type": "string",
-                                        "format": "email",
-                                        "example": "user@example.com"
+                                        "example": "john lay"
                                     },
                                     "email": {
                                         "type": "string",
@@ -43,7 +41,8 @@
                                         "example": "PassWord12345"
                                     },
                                     "mobile_number": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "example": "0987654321"
                                     }
                                 },
                                 "type": "object"
@@ -53,17 +52,69 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "successful operation"
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "isSuccessful": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "hasContent": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "400": {
-                        "description": "Bad request"
+                        "description": "validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "isSuccessful": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "hasContent": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The email has already been taken."
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": "null"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
-                },
-                "security": [
-                    {
-                        "api_key_security_example": []
-                    }
-                ]
+                }
             }
         },
         "/api/users": {
@@ -160,28 +211,61 @@
         }
     },
     "components": {
-        "securitySchemes": {
-            "Password Based": {
-                "type": "oauth2",
-                "description": "Use a global client_id / client_secret and your username / password combo to obtain a token",
-                "in": "header",
-                "flows": {
-                    "password": {
-                        "authorizationUrl": "/oauth/authorize",
-                        "tokenUrl": "/oauth/token",
-                        "refreshUrl": "/oauth/token/refresh",
-                        "scopes": {}
+        "schemas": {
+            "User": {
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "username": {
+                        "type": "string",
+                        "example": "username"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "user@test.com"
+                    },
+                    "email_verified_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2020-3-25 20:30:50"
+                    },
+                    "user_photo": {
+                        "type": "string",
+                        "example": "/storage/users/photos/username_1249382727.jpg"
+                    },
+                    "mobile_number": {
+                        "type": "string",
+                        "example": "0987654321"
+                    },
+                    "password_reset_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2020-3-25 20:30:50"
+                    },
+                    "language_id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "role_id": {
+                        "type": "integer",
+                        "example": "1"
                     }
                 },
-                "scheme": "https"
+                "type": "object",
+                "xml": {
+                    "name": "User"
+                }
             }
         }
     },
     "security": [
         []
-    ],
-    "externalDocs": {
-        "description": "Find out more about Swagger",
-        "url": "http://swagger.io"
-    }
+    ]
 }

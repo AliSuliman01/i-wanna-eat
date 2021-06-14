@@ -17,8 +17,9 @@ abstract class CustomFormRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         $e = (new ValidationException($validator));
-
-        throw new CustomException($e->errors(), $e->getTrace(), 400);
+        $errors = $e->errors() ;
+        reset($errors);
+        throw new CustomException($errors[key($errors)][0], $e->getTrace(), 400);
     }
 
     public abstract function rules();

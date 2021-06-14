@@ -47,6 +47,5 @@ class EventServiceProvider extends ServiceProvider
         RegionTypeTranslation::observe(RegionTypeTranslationObserver::class);
         Language::observe(LanguageObserver::class);
         Role::observe(RoleObserver::class);
-        User::observe(UserObserver::class);
     }
 }
