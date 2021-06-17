@@ -29,9 +29,7 @@ class LoginAction
                     'token' => $tokenObj->accessToken
                     ];
             }else{
-                throw new CustomException([
-                    'password'  =>  'this password is invalid!'
-                ],[],400);
+                throw new CustomException('this password is invalid!',[],400);
             }
         }
     }

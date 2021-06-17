@@ -9,12 +9,106 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Log In using email or username or mobile number and password",
+                "operationId": "LogInUser",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/components/schemas/EmailLogInRequest"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/UsernameLogInRequest"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/MobileNumberLogInRequest"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "isSuccessful": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "hasContent": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/LogInResponse"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "isSuccessful": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "hasContent": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "code": {
+                                            "type": "integer",
+                                            "example": "400"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The selected email is invalid."
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": "null"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/auth/signup": {
             "post": {
                 "tags": [
                     "auth"
                 ],
-                "summary": "Signup using email and password",
+                "summary": "Sign Up using email and password",
                 "operationId": "SignupUser",
                 "requestBody": {
                     "required": true,
@@ -90,15 +184,15 @@
                                     "properties": {
                                         "isSuccessful": {
                                             "type": "boolean",
-                                            "example": "true"
+                                            "example": "false"
                                         },
                                         "hasContent": {
                                             "type": "boolean",
-                                            "example": "true"
+                                            "example": "false"
                                         },
                                         "code": {
                                             "type": "integer",
-                                            "example": "200"
+                                            "example": "400"
                                         },
                                         "message": {
                                             "type": "string",
@@ -213,6 +307,7 @@
     "components": {
         "schemas": {
             "User": {
+                "title": "object",
                 "required": [
                     "email",
                     "password"
@@ -262,6 +357,90 @@
                 "xml": {
                     "name": "User"
                 }
+            },
+            "EmailLogInRequest": {
+                "title": "using email",
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "user@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "example": "PassWord12345"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "EmailLogInRequest"
+                }
+            },
+            "UsernameLogInRequest": {
+                "title": "using username",
+                "required": [
+                    "username",
+                    "password"
+                ],
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "example": "john lay"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "example": "PassWord12345"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "UsernameLogInRequest"
+                }
+            },
+            "MobileNumberLogInRequest": {
+                "title": "using mobile number",
+                "required": [
+                    "mobile_number",
+                    "password"
+                ],
+                "properties": {
+                    "mobile_number": {
+                        "type": "string",
+                        "example": "0987654321"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "example": "PassWord12345"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "MobileNumberLogInRequest"
+                }
+            },
+            "LogInResponse": {
+                "title": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    {
+                        "properties": {
+                            "token": {
+                                "type": "string",
+                                "example": "eyJ0eXAiOi4KV1QiLCJhhGciOiJSUzI1NiJ9.eyJhdWQi8iIxIiwianRpIjoiYjNkZTM4ZjFkNjQ1OTQyYjc4ZWMwNmYxNDViNjkzOWE1MGYzMDBmMmM4ZjBkMTA3YzhiZmx5MDQwNDkyZDJiNGMzZWFhOTJiMzE5Yzc2MjMiLCJpYXQiOjE2MjM5MTA5NjkuMTUyODQyLCJuYmYiOjE2Mjb5MTA5NjkuMTUyODUzLCJleHAiOjE2NTU0NDY5NjkuMTI1OTA0LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.K_U6LrvxmGS5k2g5kZkTR76MEOVa2cdcGqtNspnMG3l9jmvKWbFkb1Rd0h0EN87asz6c-RpWiMAhZfUcMYN25ajeImgQD9x6KfRrOHb2H3BZPfQDt9D8Fs29I6437LqEIexWFoazjC6g4KLSbkBqcNBDX7wyqIMeGQfGm-Dd_jL35ba4qYwi5FTKRYWD59Yqu2q-RFoNDHOP8PUEvULLNiwxBUzy30obMNxFE_uUoBhRwIpfey1qZeXgsdGsUfSuTfHK9B4QPvTNktT-auKM3VerZy9an4QB45ImGaSo9OsIewFnZj57JxitbTs5a6XmzNlHe0E94xZXJeHp_E6-997S3APe6rZVJDPN3iHc4wLiBVewBJ8bUOjlNbuuyLp1OISaIei-4gyZgFYioVJrOvw5nyNevBndXuK8cRt-zH9aVONcAYpQiGsLT4I0s6dO5bQfNGZ6hChnyBOAwlldwF_MX3Byn1mE1TiSOF12ciXkxXlhbWLmr-xeoMqDSzpCtyQuMPyQcDe2C-cuvqQMbiDp1nU2x5SiNUQawCjjLlAuUzamJ9cMaj6oZV7SwiwKDn8pqwBrRGfCMM1dTzak6Anp_2HTQIxhfp5B0ZOXP1rFC7WI5dcsb6OOVpd5kMwWgQWFmdNsYFybCliShKYtV-6HO1J2sKpRiqSvmbQaRIY"
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
             }
         }
     },
