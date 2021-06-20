@@ -22,8 +22,6 @@ class RoleShowVM implements Arrayable
     }
     public function toArray(): array
     {
-        return [
-            'Role' => $this->get_Role()
-        ];
+        return $this->get_Role();
     }
 }

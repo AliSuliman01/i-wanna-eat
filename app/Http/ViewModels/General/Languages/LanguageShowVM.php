@@ -22,8 +22,6 @@ class LanguageShowVM implements Arrayable
     }
     public function toArray(): array
     {
-        return [
-            'Language' => $this->get_Language()
-        ];
+        return  $this->get_Language()->toArray();
     }
 }

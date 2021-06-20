@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Auth;
 class RegionTypeUpdateAction
 {
 
+    /**
+     * @param RegionTypeDTO $regionTypeDTO
+     * @return RegionType
+     */
     public static function execute(
         RegionTypeDTO $regionTypeDTO
     ){

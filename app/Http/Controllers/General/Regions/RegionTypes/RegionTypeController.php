@@ -48,7 +48,9 @@ class RegionTypeController extends Controller
         $regionTypeDTO = RegionTypeDTO::fromRequest($data);
 
         $regionType = RegionTypeUpdateAction::execute($regionTypeDTO);
-
+        foreach ($data['translations'] as $translation) {
+            $regionType->translations()->updateExistingPivot($translation['language_id'],$translation);
+        }
         $regionType = new RegionTypeShowVM($regionType->id);
 
         $response = Helpers::createSuccessResponse($regionType->toArray());

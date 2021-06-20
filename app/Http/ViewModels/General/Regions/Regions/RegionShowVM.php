@@ -18,12 +18,10 @@ class RegionShowVM implements Arrayable
     }
 
     private function get_Region(){
-        return Region::find($this->regionId);
+        return Region::with(['translations'])->find($this->regionId);
     }
     public function toArray(): array
     {
-        return [
-            'Region' => $this->get_Region()
-        ];
+        return $this->get_Region()->toArray();
     }
 }

@@ -14,8 +14,6 @@ class RoleIndexVM implements Arrayable
 	}
     public function toArray(): array
     {
-        return [
-            'roles' => $this->get_roles()
-        ];
+        return $this->get_roles();
     }
 }

@@ -3,13 +3,14 @@
 namespace App\Domain\General\Roles\Roles\Model;
 
 use App\Domain\General\Users\Users\Model\User;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Role extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory,SoftDeletes,CascadeSoftDeletes;
 
         protected $guarded = [
             'id',
@@ -26,9 +27,4 @@ class Role extends Model
             'updated_by_user_id',
             'deleted_by_user_id',
         ];
-
-
-    public function users(){
-        return $this->belongsToMany(User::class, 'user_roles');
-    }
 }

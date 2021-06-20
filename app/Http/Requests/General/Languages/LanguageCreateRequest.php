@@ -8,22 +8,14 @@ use App\Http\Requests\CustomFormRequest;
 
 class LanguageCreateRequest extends CustomFormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
 
     public function rules(): array
     {
         return [
-            'name' 					=> '' ,
-			'abbrev' 					=> '' ,
+            'name' 					=> 'string|required|unique:languages,name,NULL,id,deleted_at,NULL' ,
+			'abbrev' 					=> 'string|nullable|unique:languages,abbrev,NULL,id,deleted_at,NULL' ,
 
         ];
     }
 
-    public function validationData(): array
-    {
-        return $this->json()->all();
-    }
 }

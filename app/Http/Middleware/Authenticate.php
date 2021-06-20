@@ -22,6 +22,6 @@ class Authenticate extends Middleware
 
     protected function unauthenticated($request, array $guards)
     {
-        throw new CustomException(['msg' => 'unauthorized'],[],401);
+        throw new CustomException( 'unauthorized',[],401);
     }
 }

@@ -22,8 +22,6 @@ class RegionTypeShowVM implements Arrayable
     }
     public function toArray(): array
     {
-        return [
-            'RegionType' => $this->get_RegionType()
-        ];
+        return $this->get_RegionType()->toArray();
     }
 }

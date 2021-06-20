@@ -14,8 +14,6 @@ class LanguageIndexVM implements Arrayable
 	}
     public function toArray(): array
     {
-        return [
-            'languages' => $this->get_languages()
-        ];
+        return $this->get_languages()->toArray();
     }
 }

@@ -13,7 +13,6 @@ class RegionDestroyAction
     public static function execute(
         RegionDTO   $regionDTO
     ){
-
         $region = Region::find($regionDTO->id);
         $region->delete();
         return $region;

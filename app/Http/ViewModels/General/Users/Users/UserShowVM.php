@@ -22,8 +22,6 @@ class UserShowVM implements Arrayable
     }
     public function toArray(): array
     {
-        return [
-            'User' => $this->get_User()
-        ];
+        return $this->get_User();
     }
 }

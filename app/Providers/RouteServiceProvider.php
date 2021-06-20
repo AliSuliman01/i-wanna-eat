@@ -56,6 +56,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes('routes');
         $this->mapGeneralRoutes('routes/General');
+        $this->mapMainRoutes('routes/Main');
         $this->mapWebRoutes('routes');
     }
     public function mapApiRoutes($path){
@@ -63,6 +64,12 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path($path.'/api.php'));
+    }
+    public function mapMainRoutes($path){
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/Restaurants/Restaurants/restaurants.php'));
     }
     public function mapUsersRoutes($path){
         Route::prefix('api')

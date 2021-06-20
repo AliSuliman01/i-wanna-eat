@@ -10,12 +10,10 @@ class RegionIndexVM implements Arrayable
 {
 
     public function get_regions(){
-    	return Region::all();
+    	return Region::with(['translations'])->get();
 	}
     public function toArray(): array
     {
-        return [
-            'regions' => $this->get_regions()
-        ];
+        return $this->get_regions()->toArray();
     }
 }

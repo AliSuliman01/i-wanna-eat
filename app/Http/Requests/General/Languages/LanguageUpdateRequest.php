@@ -17,8 +17,9 @@ class LanguageUpdateRequest extends CustomFormRequest
     {
         return [
             'id' => 'required|exists:languages,id,deleted_at,NULL',
-            'name' 					=> '' ,
-			'abbrev' 					=> '' ,
+            'name' 					=> 'string|required|unique:languages,name,'.$this->id.',id,deleted_at,NULL' ,
+            'abbrev' 					=> 'string|nullable|unique:languages,abbrev,'.$this->id.',id,deleted_at,NULL' ,
+
 
         ];
     }

@@ -18,6 +18,9 @@ class RegionTypeUpdateRequest extends CustomFormRequest
     {
         return [
             'id' => 'required|exists:region_types,id,deleted_at,NULL',
+            'translations' => 'array|required',
+            'translations.*.language_id' => 'required|exists:languages,id,deleted_at,NULL',
+            'translations.*.name' => 'required|string'
 
         ];
     }

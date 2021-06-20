@@ -29,20 +29,23 @@ class UserController extends Controller
      *      description="Returns list of users",
      *      @OA\Response(
      *          response=200,
-     *          description="successful operation"
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              @OA\Property (property="isSuccessful",type="boolean",example="true"),
+     *              @OA\Property (property="hasContent",type="boolean",example="true"),
+     *              @OA\Property (property="code",type="integer",example="200"),
+     *              @OA\Property (property="message",type="string",example=""),
+     *              @OA\Property (property="data",type="array",@OA\Items( ref="#/components/schemas/User"))
+     *          )
      *       ),
      *       @OA\Response(response=400, description="Bad request"),
-     *       security={
-     *           {"api_key_security_example": {}}
-     *       }
+     *
      *     )
      *
-     * Returns list of projects
+     * Returns list of users
      */
     public function index(){
-        $class = "App\Http\ViewModels\General\Users\Users\UserIndexVM";
-
-        return response()->json(Helpers::createSuccessResponse((new $class())->toArray()));
+        return response()->json(Helpers::createSuccessResponse((new UserIndexVM())->toArray()));
     }
     /**
      * @OA\Get(

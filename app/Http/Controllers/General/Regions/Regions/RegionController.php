@@ -26,7 +26,7 @@ class RegionController extends Controller
     }
 
     public function show(RegionShowRequest $regionShowRequest){
-      
+
         return response()->json(Helpers::createSuccessResponse((new RegionShowVM($regionShowRequest->route('id')))->toArray()));
     }
 
@@ -34,8 +34,12 @@ class RegionController extends Controller
         $data = $regionCreateRequest->validated() ;
 
         $regionDTO = RegionDTO::fromRequest($data);
-        
+
         $region = RegionCreateAction::execute($regionDTO);
+
+        foreach ($data['translations'] as $translation) {
+            $region->translations()->attach($translation['language_id'],$translation);
+        }
 
         $region = new RegionShowVM($region->id);
 
@@ -48,11 +52,11 @@ class RegionController extends Controller
         $data = $regionUpdateRequest->validated() ;
 
         $regionDTO = RegionDTO::fromRequest($data);
-        
+
         $region = RegionUpdateAction::execute($regionDTO);
 
         $region = new RegionShowVM($region->id);
-        
+
         $response = Helpers::createSuccessResponse($region->toArray());
 
         return response()->json($response);
