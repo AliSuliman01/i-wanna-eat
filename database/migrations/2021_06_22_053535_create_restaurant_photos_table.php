@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRegionTranslationsTable extends Migration
+class CreateRestaurantPhotosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,10 @@ class CreateRegionTranslationsTable extends Migration
     public function up()
     {
         try{
-            Schema::create('region_translations', function (Blueprint $table) {
+            Schema::create('restaurant_photos', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('language_id')->constrained()->cascadeOnDelete();
-                $table->foreignId('region_id')->constrained()->cascadeOnDelete();
-                $table->string('name');
+                $table->foreignId('restaurant_id')->constrained()->cascadeOnDelete();
+                $table->string('photo_path');
                 $table->foreignId('created_by_user_id')->nullable()->constrained('users')->onDelete('cascade');
                 $table->foreignId('updated_by_user_id')->nullable()->constrained('users')->onDelete('cascade');
                 $table->foreignId('deleted_by_user_id')->nullable()->constrained('users')->onDelete('cascade');
@@ -38,6 +37,6 @@ class CreateRegionTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('region_translations');
+        Schema::dropIfExists('restaurant_photos');
     }
 }

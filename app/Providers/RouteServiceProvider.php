@@ -70,6 +70,10 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path($path.'/Restaurants/Restaurants/restaurants.php'));
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/Restaurants/RestaurantPhotos/restaurant_photos.php'));
     }
     public function mapUsersRoutes($path){
         Route::prefix('api')

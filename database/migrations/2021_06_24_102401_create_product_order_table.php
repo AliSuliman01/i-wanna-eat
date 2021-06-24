@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRegionTypeTranslationsTable extends Migration
+class CreateProductOrderTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,10 @@ class CreateRegionTypeTranslationsTable extends Migration
     public function up()
     {
         try{
-            Schema::create('region_type_translations', function (Blueprint $table) {
+            Schema::create('product_order', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('region_type_id')->constrained()->cascadeOnDelete();
-                $table->foreignId('language_id')->constrained()->cascadeOnDelete();
-                $table->string('name');
+                $table->foreignId('product_id')->constrained()->onDelete('cascade');
+                $table->foreignId('order_id')->constrained()->onDelete('cascade');
                 $table->foreignId('created_by_user_id')->nullable()->constrained('users')->onDelete('cascade');
                 $table->foreignId('updated_by_user_id')->nullable()->constrained('users')->onDelete('cascade');
                 $table->foreignId('deleted_by_user_id')->nullable()->constrained('users')->onDelete('cascade');
@@ -38,6 +37,6 @@ class CreateRegionTypeTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('region_type_translations');
+        Schema::dropIfExists('product_order');
     }
 }

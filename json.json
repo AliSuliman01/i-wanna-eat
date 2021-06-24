@@ -1,38 +1,18 @@
 {
     "tables": [
         {
-            "table_name": "restaurants",
-            "entity_name": "Restaurant",
-            "base_path": "Content\\Restaurants\\Restaurants",
+            "table_name": "product_order",
+            "entity_name": "ProductOrder",
+            "base_path": "Main\\Products\\ProductOrder",
             "operation": "crud",
             "columns": [
                 {
                     "type": "integer",
-                    "name": "region_id"
-                },
-                {
-                    "type": "string",
-                    "name": "name"
+                    "name": "product_id"
                 },
                 {
                     "type": "integer",
-                    "name": "stars"
-                },
-                {
-                    "type": "integer",
-                    "name": "is_validated_from_us"
-                },
-                {
-                    "type": "string",
-                    "name": "open_at"
-                },
-                {
-                    "type": "string",
-                    "name": "close_at"
-                },
-                {
-                    "type": "integer",
-                    "name": "has_family_section"
+                    "name": "order_id"
                 }
             ]
         }
