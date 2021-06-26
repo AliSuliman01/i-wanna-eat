@@ -18,7 +18,7 @@ class ProductShowVM implements Arrayable
     }
 
     private function get_Product(){
-        return Product::find($this->productId);
+        return Product::with(['translations','photos','ingredients'])->find($this->productId);
     }
     public function toArray(): array
     {

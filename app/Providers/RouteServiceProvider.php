@@ -54,27 +54,12 @@ class RouteServiceProvider extends ServiceProvider
 
     public function map()
     {
-        $this->mapApiRoutes('routes');
         $this->mapGeneralRoutes('routes/General');
         $this->mapMainRoutes('routes/Main');
+        $this->mapApiRoutes('routes');
         $this->mapWebRoutes('routes');
     }
-    public function mapApiRoutes($path){
-        Route::prefix('api')
-            ->middleware('api')
-            ->namespace($this->namespace)
-            ->group(base_path($path.'/api.php'));
-    }
-    public function mapMainRoutes($path){
-        Route::prefix('api')
-            ->middleware('api')
-            ->namespace($this->namespace)
-            ->group(base_path($path.'/Restaurants/Restaurants/restaurants.php'));
-        Route::prefix('api')
-            ->middleware('api')
-            ->namespace($this->namespace)
-            ->group(base_path($path.'/Restaurants/RestaurantPhotos/restaurant_photos.php'));
-    }
+
     public function mapUsersRoutes($path){
         Route::prefix('api')
             ->middleware('api')
@@ -84,6 +69,20 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path($path.'/Users/users.php'));
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/UserActivity/user_activity.php'));
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/UserConnections/user_connections.php'));
+    }
+    public function mapLanguagesRoutes($path){
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/languages.php'));
     }
     public function mapRegionsRoutes($path){
         Route::prefix('api')
@@ -93,7 +92,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->namespace)
-            ->group(base_path($path.'/RegionTranslations/region_translations.php'));
+            ->group(base_path($path.'/RegionTranslation/region_translation.php'));
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->namespace)
@@ -101,21 +100,108 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->namespace)
-            ->group(base_path($path.'/RegionTypeTranslations/region_type_translations.php'));
+            ->group(base_path($path.'/RegionTypeTranslation/region_type_translation.php'));
     }
     public function mapGeneralRoutes($path){
         $this->mapUsersRoutes($path.'/Users');
         $this->mapLanguagesRoutes($path.'/Languages');
         $this->mapRegionsRoutes($path.'/Regions');
     }
-    public function mapLanguagesRoutes($path){
+
+
+    public function mapCategoriesRoutes($path){
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->namespace)
-            ->group(base_path($path.'/languages.php'));
+            ->group(base_path($path.'/Categories/categories.php'));
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/CategoryPhotos/category_photos.php'));
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/CategoryTranslation/category_translation.php'));
+    }
+    public function mapIngredientsRoutes($path){
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/Ingredients/ingredients.php'));
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/IngredientTranslation/ingredient_translation.php'));
+    }
+    public function mapOrdersRoutes($path){
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/Orders/orders.php'));
+    }
+    public function mapProductsRoutes($path){
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/Products/products.php'));
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/ProductTranslation/product_translation.php'));
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/ProductPhotos/product_photos.php'));
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/ProductOrder/product_order.php'));
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/ProductIngredient/product_ingredient.php'));
+    }
+    public function mapRestaurantsRoutes($path){
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/Restaurants/restaurants.php'));
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/RestaurantPhotos/restaurant_photos.php'));
+    }
+    public function mapServicesRoutes($path){
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/Services/services.php'));
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/ServiceTranslation/service_translation.php'));
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/ServiceOrder/service_order.php'));
+    }
+    public function mapMainRoutes($path){
+        $this->mapCategoriesRoutes($path.'/Categories');
+        $this->mapIngredientsRoutes($path.'/Ingredients');
+        $this->mapOrdersRoutes($path.'/Orders');
+        $this->mapProductsRoutes($path.'/Products');
+        $this->mapRestaurantsRoutes($path.'/Restaurants');
+        $this->mapServicesRoutes($path.'/Services');
+    }
+
+
+    public function mapApiRoutes($path){
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/api.php'));
     }
     public function mapWebRoutes($path){
-
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path($path.'/web.php'));

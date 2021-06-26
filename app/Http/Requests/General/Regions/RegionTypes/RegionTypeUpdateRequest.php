@@ -9,11 +9,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class RegionTypeUpdateRequest extends CustomFormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [
@@ -23,10 +18,5 @@ class RegionTypeUpdateRequest extends CustomFormRequest
             'translations.*.name' => 'required|string'
 
         ];
-    }
-
-    public function validationData(): array
-    {
-        return $this->json()->all();
     }
 }

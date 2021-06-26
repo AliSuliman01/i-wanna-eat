@@ -1,18 +1,18 @@
 {
     "tables": [
         {
-            "table_name": "product_order",
-            "entity_name": "ProductOrder",
-            "base_path": "Main\\Products\\ProductOrder",
+            "table_name": "user_connections",
+            "entity_name": "UserConnection",
+            "base_path": "General\\Users\\UserConnections",
             "operation": "crud",
             "columns": [
                 {
                     "type": "integer",
-                    "name": "product_id"
+                    "name": "user_id"
                 },
                 {
-                    "type": "integer",
-                    "name": "order_id"
+                    "type": "string",
+                    "name": "ip"
                 }
             ]
         }

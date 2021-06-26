@@ -3,6 +3,7 @@
 namespace App\Domain\Main\Restaurants\Restaurants\Model;
 
 use App\Domain\General\Regions\Regions\Model\Region;
+use App\Domain\Main\Restaurants\RestaurantPhotos\Model\RestaurantPhoto;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,5 +31,8 @@ class Restaurant extends Model
 
         public function region(){
             return $this->belongsTo(Region::class);
+        }
+        public function photos(){
+            return $this->hasMany(RestaurantPhoto::class);
         }
 }

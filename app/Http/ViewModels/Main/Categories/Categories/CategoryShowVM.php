@@ -18,7 +18,7 @@ class CategoryShowVM implements Arrayable
     }
 
     private function get_Category(){
-        return Category::find($this->categoryId);
+        return Category::with(['translations','photos'])->find($this->categoryId);
     }
     public function toArray(): array
     {

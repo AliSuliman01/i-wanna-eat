@@ -10,7 +10,7 @@ class CategoryIndexVM implements Arrayable
 {
 
     public function get_categories(){
-    	return Category::all();
+    	return Category::with(['translations','photos'])->get();
 	}
     public function toArray(): array
     {

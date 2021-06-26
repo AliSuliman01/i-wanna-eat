@@ -9,11 +9,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UserUpdateRequest extends CustomFormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [
@@ -26,10 +21,5 @@ class UserUpdateRequest extends CustomFormRequest
 			'mobile_number' 					=> '' ,
 			'region_id' 					=> '' ,
         ];
-    }
-
-    public function validationData(): array
-    {
-        return $this->json()->all();
     }
 }

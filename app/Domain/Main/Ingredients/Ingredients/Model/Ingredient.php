@@ -2,6 +2,8 @@
 
 namespace App\Domain\Main\Ingredients\Ingredients\Model;
 
+use App\Domain\General\Languages\Model\Language;
+use App\Domain\Main\Ingredients\IngredientTranslation\Model\IngredientTranslation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -25,4 +27,10 @@ class Ingredient extends Model
             'updated_by_user_id',
             'deleted_by_user_id',
         ];
+
+        public function translations(){
+            return $this->belongsToMany(Language::class,'ingredient_translation')
+                        ->using(IngredientTranslation::class)
+                        ->wherePivot('deleted_at',null);
+        }
 }

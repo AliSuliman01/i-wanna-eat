@@ -18,7 +18,7 @@ class IngredientShowVM implements Arrayable
     }
 
     private function get_Ingredient(){
-        return Ingredient::find($this->ingredientId);
+        return Ingredient::with(['translations'])->find($this->ingredientId);
     }
     public function toArray(): array
     {

@@ -3,7 +3,8 @@
 namespace App\Domain\General\Regions\Regions\Model;
 
 use App\Domain\General\Languages\Model\Language;
-use App\Domain\General\Regions\RegionTranslations\Model\RegionTranslation;
+use App\Domain\General\Regions\RegionTranslation\Model\RegionTranslation;
+use App\Domain\General\Regions\RegionTypes\Model\RegionType;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -37,5 +38,8 @@ class Region extends Model
                     ->using(RegionTranslation::class)
                     ->withPivot(['name'])
                     ->wherePivot('deleted_at',null);
+    }
+    public  function region_type(){
+        return $this->belongsTo(RegionType::class);
     }
 }

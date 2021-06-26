@@ -13,7 +13,6 @@ class LanguageCreateAction
     public static function execute(
         LanguageDTO $languageDTO
     ){
-
         $language = new Language($languageDTO->toArray());
         $language->save();
         return $language;

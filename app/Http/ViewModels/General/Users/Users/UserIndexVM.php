@@ -14,6 +14,6 @@ class UserIndexVM implements Arrayable
 	}
     public function toArray(): array
     {
-        return $this->get_users();
+        return $this->get_users()->toArray();
     }
 }

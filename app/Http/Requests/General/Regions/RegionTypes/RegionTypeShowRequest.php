@@ -9,20 +9,10 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class RegionTypeShowRequest extends CustomFormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [
             'id'=> 'required|exists:region_types,id,deleted_at,NULL',
         ];
-    }
-
-    public function validationData(): array
-    {
-        return $this->route()->parameters();
     }
 }

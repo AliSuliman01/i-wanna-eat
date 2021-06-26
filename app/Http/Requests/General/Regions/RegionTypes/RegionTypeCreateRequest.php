@@ -9,11 +9,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class RegionTypeCreateRequest extends CustomFormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [
@@ -21,10 +16,5 @@ class RegionTypeCreateRequest extends CustomFormRequest
             'translations.*.language_id' => 'required|exists:languages,id,deleted_at,NULL',
             'translations.*.name' => 'required|unique:region_type_translations,name,NULL,id,deleted_at,NULL'
         ];
-    }
-
-    public function validationData(): array
-    {
-        return $this->json()->all();
     }
 }

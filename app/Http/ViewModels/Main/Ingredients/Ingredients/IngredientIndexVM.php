@@ -10,7 +10,7 @@ class IngredientIndexVM implements Arrayable
 {
 
     public function get_ingredients(){
-    	return Ingredient::all();
+    	return Ingredient::with(['translations'])->get();
 	}
     public function toArray(): array
     {

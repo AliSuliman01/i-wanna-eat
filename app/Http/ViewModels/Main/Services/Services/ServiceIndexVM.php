@@ -10,7 +10,7 @@ class ServiceIndexVM implements Arrayable
 {
 
     public function get_services(){
-    	return Service::all();
+    	return Service::with(['translations'])->get();
 	}
     public function toArray(): array
     {

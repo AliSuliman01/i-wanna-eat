@@ -42,9 +42,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         Region::observe(RegionObserver::class);
-        RegionTranslation::observe(RegionTranslationObserver::class);
         RegionType::observe(RegionTypeObserver::class);
-        RegionTypeTranslation::observe(RegionTypeTranslationObserver::class);
         Language::observe(LanguageObserver::class);
         Role::observe(RoleObserver::class);
     }

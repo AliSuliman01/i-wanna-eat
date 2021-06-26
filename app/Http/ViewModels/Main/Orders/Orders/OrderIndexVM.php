@@ -10,7 +10,7 @@ class OrderIndexVM implements Arrayable
 {
 
     public function get_orders(){
-    	return Order::all();
+    	return Order::with(['products','services'])->get();
 	}
     public function toArray(): array
     {

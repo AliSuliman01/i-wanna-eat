@@ -4,11 +4,12 @@ namespace App\Domain\Main\Categories\CategoryTranslations\Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Concerns\AsPivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CategoryTranslation extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory,SoftDeletes,AsPivot;
 
         protected $guarded = [
             'id',

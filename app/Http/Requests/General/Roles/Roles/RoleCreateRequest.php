@@ -9,36 +9,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class RoleCreateRequest extends CustomFormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     public function rules(): array
     {
         return [
-            'id' 					=> '' ,
-			'user_name' 					=> '' ,
-			'email' 					=> '' ,
-			'password' 					=> '' ,
-			'role_id' 					=> '' ,
-			'default_translation_id' 					=> '' ,
-			'user_photo' 					=> '' ,
-			'mobile_number' 					=> '' ,
-			'region_id' 					=> '' ,
-			'activation_token' 					=> '' ,
-			'reset_password_token' 					=> '' ,
-			'is_activated' 					=> '' ,
-			'is_password_reset' 					=> '' ,
-			'id' 					=> '' ,
-			'name' 					=> '' ,
-			'description' 					=> '' ,
-
+			'name' 					=> 'required|unique:roles,name,null,id,deleted_at,NULL' ,
+			'description' 					=> 'nullable|string' ,
         ];
-    }
-
-    public function validationData(): array
-    {
-        return $this->json()->all();
     }
 }

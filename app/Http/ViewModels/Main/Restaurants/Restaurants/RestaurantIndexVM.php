@@ -10,7 +10,7 @@ class RestaurantIndexVM implements Arrayable
 {
 
     public function get_restaurants(){
-    	return Restaurant::with(['region'])->get();
+    	return Restaurant::with(['region','photos'])->get();
 	}
     public function toArray(): array
     {

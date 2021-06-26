@@ -18,7 +18,7 @@ class OrderShowVM implements Arrayable
     }
 
     private function get_Order(){
-        return Order::find($this->orderId);
+        return Order::with(['products','services'])->find($this->orderId);
     }
     public function toArray(): array
     {

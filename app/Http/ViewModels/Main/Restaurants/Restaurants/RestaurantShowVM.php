@@ -18,7 +18,7 @@ class RestaurantShowVM implements Arrayable
     }
 
     private function get_Restaurant(){
-        return Restaurant::with(['region'])->find($this->restaurantId);
+        return Restaurant::with(['region','photos'])->find($this->restaurantId);
     }
     public function toArray(): array
     {

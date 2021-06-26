@@ -10,7 +10,7 @@ class ProductIndexVM implements Arrayable
 {
 
     public function get_products(){
-    	return Product::all();
+    	return Product::with(['translations','photos','ingredients'])->get();
 	}
     public function toArray(): array
     {
