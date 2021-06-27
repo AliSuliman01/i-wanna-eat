@@ -17,7 +17,7 @@ class ProductUpdateRequest extends CustomFormRequest
             'restaurant_id' 					=> 'nullable|integer|exists:restaurants,id,deleted_at,NULL' ,
 
             'translations'             => 'nullable|array',
-            'translations.*.id'    => 'required|integer|exists:product_translation,id,deleted_at,NULL',
+            'translations.*.id'    => 'nullable|integer|exists:product_translation,id,deleted_at,NULL',
             'translations.*.language_id'    => 'required|integer|exists:languages,id,deleted_at,NULL',
             'translations.*.name'    => 'required|string',
             'translations.*.description'    => 'nullable|string',
@@ -26,7 +26,7 @@ class ProductUpdateRequest extends CustomFormRequest
             'ingredients.*'    => 'required|integer|exists:ingredients,id,deleted_at,NULL',
 
             'photos'            => 'nullable|array',
-            'photos.*.id'            => 'required|integer|product_photos,id,deleted_at,NULL',
+            'photos.*.id'            => 'nullable|integer|product_photos,id,deleted_at,NULL',
             'photos.*.photo_path'            => 'required|string',
 
         ];

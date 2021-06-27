@@ -23,6 +23,7 @@ class CategoryUpdateRequest extends CustomFormRequest
             'translations.*.description' => 'string|required',
 
             'photos' => 'array|nullable',
+            'photos.*.id' => 'integer|nullable|exists:category_photos,id,deleted_at,NULL',
             'photos.*.category_id' => 'integer|required|exists:categories,id,deleted_at,NULL',
             'photos.*.photo_path' => 'string|required',
 
