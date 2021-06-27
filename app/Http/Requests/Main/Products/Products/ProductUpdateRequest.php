@@ -27,7 +27,7 @@ class ProductUpdateRequest extends CustomFormRequest
 
             'photos'            => 'nullable|array',
             'photos.*.id'            => 'required|integer|product_photos,id,deleted_at,NULL',
-            'photos.*.file_path'            => 'required|string',
+            'photos.*.photo_path'            => 'required|string',
 
         ];
     }

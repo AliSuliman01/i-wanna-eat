@@ -24,7 +24,7 @@ class ProductCreateRequest extends CustomFormRequest
             'ingredients.*'    => 'required|integer|exists:ingredients,id,deleted_at,NULL',
 
             'photos'            => 'required|array',
-            'photos.*.file_path'            => 'required|string',
+            'photos.*.photo_path'            => 'required|string',
 
         ];
     }

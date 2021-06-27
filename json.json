@@ -1,18 +1,18 @@
 {
     "tables": [
         {
-            "table_name": "user_connections",
-            "entity_name": "UserConnection",
-            "base_path": "General\\Users\\UserConnections",
+            "table_name": "files",
+            "entity_name": "File",
+            "base_path": "General\\Files\\Files",
             "operation": "crud",
             "columns": [
                 {
-                    "type": "integer",
-                    "name": "user_id"
+                    "type": "string",
+                    "name": "file_name"
                 },
                 {
                     "type": "string",
-                    "name": "ip"
+                    "name": "file_path"
                 }
             ]
         }

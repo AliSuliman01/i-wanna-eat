@@ -21,7 +21,7 @@ class CategoryCreateRequest extends CustomFormRequest
             'translations.*.description' => 'string|required',
 
             'photos' => 'array|required',
-            'photos.*.file_path' => 'string|required'
+            'photos.*.photo_path' => 'string|required'
 
         ];
     }

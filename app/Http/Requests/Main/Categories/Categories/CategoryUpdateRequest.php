@@ -24,7 +24,7 @@ class CategoryUpdateRequest extends CustomFormRequest
 
             'photos' => 'array|nullable',
             'photos.*.category_id' => 'integer|required|exists:categories,id,deleted_at,NULL',
-            'photos.*.file_path' => 'string|required',
+            'photos.*.photo_path' => 'string|required',
 
         ];
     }
