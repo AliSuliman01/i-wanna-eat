@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Domain\Main\Categories\CategoryPhotos\Actions;
+namespace App\Domain\Main\Categories\CategoryTranslations\Actions;
 
 use App\Domain\Main\Products\ProductTranslation\Model\ProductTranslation;
 

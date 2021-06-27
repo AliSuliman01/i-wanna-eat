@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Domain\Main\Categories\CategoryPhotos\Actions;
+namespace App\Domain\Main\Restaurants\RestaurantPhotos\Actions;
 
 use App\Domain\Main\Restaurants\RestaurantPhotos\Model\RestaurantPhoto;
 
