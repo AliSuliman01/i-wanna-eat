@@ -68,7 +68,7 @@ class ProductController extends Controller
             isset($translation['id']) ?
                 $productTranslation = ProductTranslationUpdateAction::execute(ProductTranslationDTO::fromRequest($translation)):
                 $productTranslation = ProductTranslationCreateAction::execute(ProductTranslationDTO::fromRequest($translation + ['product_id' => $product->id]));
-            $productTranslations += $productTranslation->id;
+            array_push($productTranslations , $productTranslation->id);
         }
         ProductTranslationDestroyElseAction::execute($product->id,$productTranslations);
 
@@ -79,7 +79,7 @@ class ProductController extends Controller
             isset($photo['id']) ?
                 $productPhoto = ProductPhotoUpdateAction::execute(ProductPhotoDTO::fromRequest($photo)):
                 $productPhoto = ProductPhotoCreateAction::execute(ProductPhotoDTO::fromRequest($photo + ['product_id' => $product->id]));
-            $productPhotos += $productPhoto->id;
+            array_push($productPhotos , $productPhoto->id);
         }
         ProductPhotoDestroyElseAction::execute($product->id,$productPhotos);
 

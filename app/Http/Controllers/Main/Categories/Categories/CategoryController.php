@@ -66,7 +66,7 @@ class CategoryController extends Controller
             isset($translation['id']) ?
                 $categoryTranslation = CategoryTranslationUpdateAction::execute(CategoryTranslationDTO::fromRequest($translation)):
                 $categoryTranslation = CategoryTranslationCreateAction::execute(CategoryTranslationDTO::fromRequest($translation + ['category_id' => $category->id]));
-            $categoryTranslations += $categoryTranslation->id;
+            array_push($categoryTranslations, $categoryTranslation->id);
         }
         CategoryTranslationDestroyElseAction::execute($category->id,$categoryTranslations);
 
@@ -76,7 +76,7 @@ class CategoryController extends Controller
             isset($photo['id']) ?
             $categoryPhoto = CategoryPhotoUpdateAction::execute(CategoryPhotoDTO::fromRequest($photo)):
             $categoryPhoto = CategoryPhotoCreateAction::execute(CategoryPhotoDTO::fromRequest($photo + ['category_id' => $category->id]));
-            $categoryPhotos += $categoryPhoto->id;
+            array_push($categoryPhotos , $categoryPhoto->id);
         }
         CategoryPhotoDestroyElseAction::execute($category->id,$categoryPhotos);
 
