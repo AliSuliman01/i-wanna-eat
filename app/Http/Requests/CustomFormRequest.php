@@ -26,6 +26,6 @@ abstract class CustomFormRequest extends FormRequest
 
     public function validationData(): array
     {
-        return $this->json()->all();
+        return $this->json()->all() + $this->route()->parameters();
     }
 }
