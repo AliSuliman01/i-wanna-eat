@@ -21,7 +21,7 @@ class RestaurantUpdateRequest extends CustomFormRequest
             'region_id'             => 'integer|nullable|exists:regions,id,deleted_at,NULL',
 
             'photos'            => 'nullable|array',
-            'photos.*.id'            => 'nullable|integer|restaurant_photos,id,deleted_at,NULL',
+            'photos.*.id'            => 'nullable|integer|exists:restaurant_photos,id,deleted_at,NULL',
             'photos.*.photo_path'            => 'required|string',
 
         ];

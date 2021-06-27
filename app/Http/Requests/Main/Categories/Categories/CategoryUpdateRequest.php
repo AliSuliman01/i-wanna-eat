@@ -17,6 +17,7 @@ class CategoryUpdateRequest extends CustomFormRequest
             'expired_at' 					=> 'nullable|string' ,
 
             'translations' => 'array|nullable',
+            'translations.*.id' => 'integer|required|exists:category_translations,id,deleted_at,NULL',
             'translations.*.category_id' => 'integer|required|exists:categories,id,deleted_at,NULL',
             'translations.*.language_id' => 'integer|required|exists:languages,id,deleted_at,NULL',
             'translations.*.name' => 'string|required',

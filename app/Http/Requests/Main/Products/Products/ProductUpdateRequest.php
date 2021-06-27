@@ -26,7 +26,7 @@ class ProductUpdateRequest extends CustomFormRequest
             'ingredients.*'    => 'required|integer|exists:ingredients,id,deleted_at,NULL',
 
             'photos'            => 'nullable|array',
-            'photos.*.id'            => 'nullable|integer|product_photos,id,deleted_at,NULL',
+            'photos.*.id'            => 'nullable|integer|exists:product_photos,id,deleted_at,NULL',
             'photos.*.photo_path'            => 'required|string',
 
         ];
