@@ -56,7 +56,7 @@ class RestaurantController extends Controller
             isset($photo['id']) ?
                 $restaurantPhoto = RestaurantPhotoUpdateAction::execute(RestaurantPhotoDTO::fromRequest($photo)):
                 $restaurantPhoto = RestaurantPhotoCreateAction::execute(RestaurantPhotoDTO::fromRequest($photo + ['restaurant_id' => $restaurant->id]));
-            $restaurantPhotos += ['id' => $restaurantPhoto->id];
+            $restaurantPhotos += $restaurantPhoto->id;
         }
         RestaurantPhotosDestroyElseAction::execute($restaurant->id,$restaurantPhotos);
 

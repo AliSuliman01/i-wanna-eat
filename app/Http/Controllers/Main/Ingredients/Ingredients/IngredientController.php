@@ -56,7 +56,7 @@ class IngredientController extends Controller
             isset($translation['id']) ?
                 $ingredientTranslation = IngredientTranslationUpdateAction::execute(IngredientTranslationDTO::fromRequest($translation)):
                 $ingredientTranslation = IngredientTranslationCreateAction::execute(IngredientTranslationDTO::fromRequest($translation + ['ingredient_id' => $ingredient->id]));
-            $ingredientTranslations += ['id' => $ingredientTranslation->id];
+            $ingredientTranslations +=  $ingredientTranslation->id;
         }
         IngredientTranslationDestroyElseAction::execute($ingredient->id,$ingredientTranslations);
 
