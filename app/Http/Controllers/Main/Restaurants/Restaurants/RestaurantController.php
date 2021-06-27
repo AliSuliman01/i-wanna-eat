@@ -4,6 +4,10 @@
 namespace App\Http\Controllers\Main\Restaurants\Restaurants;
 
 
+use App\Domain\Main\Categories\CategoryPhotos\Actions\RestaurantPhotosDestroyElseAction;
+use App\Domain\Main\Restaurants\RestaurantPhotos\Actions\RestaurantPhotoCreateAction;
+use App\Domain\Main\Restaurants\RestaurantPhotos\Actions\RestaurantPhotoUpdateAction;
+use App\Domain\Main\Restaurants\RestaurantPhotos\DTO\RestaurantPhotoDTO;
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Domain\Main\Restaurants\Restaurants\Actions\RestaurantCreateAction;
@@ -32,20 +36,30 @@ class RestaurantController extends Controller
 
     public function create(RestaurantCreateRequest $restaurantCreateRequest){
         $data = $restaurantCreateRequest->validated() ;
-
         $restaurantDTO = RestaurantDTO::fromRequest($data);
-
         $restaurant = RestaurantCreateAction::execute($restaurantDTO);
+
+        foreach ($data['photos'] ?? [] as $photo){
+            RestaurantPhotoCreateAction::execute(RestaurantPhotoDTO::fromRequest($photo + ['restaurant_id' => $restaurant->id]));
+        }
 
         return response()->json(Helpers::createSuccessResponse((new RestaurantShowVM($restaurant->toArray()))->toArray()));
     }
 
     public function update(RestaurantUpdateRequest $restaurantUpdateRequest){
         $data = $restaurantUpdateRequest->validated() ;
-
         $restaurantDTO = RestaurantDTO::fromRequest($data);
-
         $restaurant = RestaurantUpdateAction::execute($restaurantDTO);
+
+        $restaurantPhotos = [];
+        foreach ($data['photos'] ?? [] as $restaurant){
+            isset($restaurant['id']) ?
+                $restaurantPhoto = RestaurantPhotoUpdateAction::execute(RestaurantPhotoDTO::fromRequest($restaurant)):
+                $restaurantPhoto = RestaurantPhotoCreateAction::execute(RestaurantPhotoDTO::fromRequest($restaurant + ['restaurant_id' => $restaurant->id]));
+            $restaurantPhotos += ['id' => $restaurantPhoto->id];
+        }
+        RestaurantPhotosDestroyElseAction::execute($restaurant->id,$restaurantPhotos);
+
 
         return response()->json(Helpers::createSuccessResponse((new RestaurantShowVM($restaurant->toArray()))->toArray()));
     }

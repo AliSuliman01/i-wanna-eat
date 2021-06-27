@@ -12,8 +12,12 @@ class IngredientUpdateRequest extends CustomFormRequest
     {
         return [
             'id' => 'required|exists:ingredients,id,deleted_at,NULL',
-            'photo_path' 					=> '' ,
-			
+            'photo_path' 					=> 'nullable|string' ,
+
+            'translations' => 'array|nullable',
+            'translations.*.id' => 'integer|nullable|exists:language_translation,id,deleted_at,NULL',
+            'translations.*.language_id' => 'integer|required|exists:languages,id,deleted_at,NULL',
+            'translations.*.name' => 'string|required',
         ];
     }
 }

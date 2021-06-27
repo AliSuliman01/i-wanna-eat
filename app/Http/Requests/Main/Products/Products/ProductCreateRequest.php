@@ -11,11 +11,21 @@ class ProductCreateRequest extends CustomFormRequest
     public function rules(): array
     {
         return [
-            'is_verified_from_us' 					=> '' ,
-			'category_id' 					=> '' ,
-			'price' 					=> '' ,
-			'restaurant_id' 					=> '' ,
-			
+			'category_id' 					=> 'required|integer|exists:categories,id,deleted_at,NULL' ,
+			'price' 					=> 'required|decimal' ,
+			'restaurant_id' 					=> 'required|integer|exists:restaurants,id,deleted_at,NULL' ,
+
+            'translations'             => 'required|array',
+            'translations.*.language_id'    => 'required|integer|exists:languages,id,deleted_at,NULL',
+            'translations.*.name'    => 'required|string',
+            'translations.*.description'    => 'nullable|string',
+
+            'ingredients'       => 'required|array',
+            'ingredients.*'    => 'required|integer|exists:ingredients,id,deleted_at,NULL',
+
+            'photos'            => 'required|array',
+            'photos.*.file_path'            => 'required|string',
+
         ];
     }
 }

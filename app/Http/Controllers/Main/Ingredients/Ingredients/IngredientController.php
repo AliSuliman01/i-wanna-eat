@@ -4,6 +4,10 @@
 namespace App\Http\Controllers\Main\Ingredients\Ingredients;
 
 
+use App\Domain\Main\Categories\CategoryPhotos\Actions\IngredientTranslationDestroyElseAction;
+use App\Domain\Main\Ingredients\IngredientTranslation\Actions\IngredientTranslationCreateAction;
+use App\Domain\Main\Ingredients\IngredientTranslation\Actions\IngredientTranslationUpdateAction;
+use App\Domain\Main\Ingredients\IngredientTranslation\DTO\IngredientTranslationDTO;
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Domain\Main\Ingredients\Ingredients\Actions\IngredientCreateAction;
@@ -26,26 +30,35 @@ class IngredientController extends Controller
     }
 
     public function show(IngredientShowRequest $ingredientShowRequest){
-      
+
         return response()->json(Helpers::createSuccessResponse((new IngredientShowVM(['id' => $ingredientShowRequest->route('id')]))->toArray()));
     }
 
     public function create(IngredientCreateRequest $ingredientCreateRequest){
         $data = $ingredientCreateRequest->validated() ;
-
         $ingredientDTO = IngredientDTO::fromRequest($data);
-        
         $ingredient = IngredientCreateAction::execute($ingredientDTO);
+
+        foreach ($data['translations'] as $translation){
+            IngredientTranslationCreateAction::execute(IngredientTranslationDTO::fromRequest($translation + ['$ingredient_id' => $ingredient->id]));
+        }
 
         return response()->json(Helpers::createSuccessResponse((new IngredientShowVM($ingredient->toArray()))->toArray()));
     }
 
     public function update(IngredientUpdateRequest $ingredientUpdateRequest){
         $data = $ingredientUpdateRequest->validated() ;
-
         $ingredientDTO = IngredientDTO::fromRequest($data);
-        
         $ingredient = IngredientUpdateAction::execute($ingredientDTO);
+
+        $ingredientTranslations = [];
+        foreach ($data['translations'] ?? [] as $translation){
+            isset($translation['id']) ?
+                $ingredientTranslation = IngredientTranslationUpdateAction::execute(IngredientTranslationDTO::fromRequest($translation)):
+                $ingredientTranslation = IngredientTranslationCreateAction::execute(IngredientTranslationDTO::fromRequest($translation + ['ingredient_id' => $ingredient->id]));
+            $ingredientTranslations += ['id' => $ingredientTranslation->id];
+        }
+        IngredientTranslationDestroyElseAction::execute($ingredient->id,$ingredientTranslations);
 
         return response()->json(Helpers::createSuccessResponse((new IngredientShowVM($ingredient->toArray()))->toArray()));
     }

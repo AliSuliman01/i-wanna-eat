@@ -11,8 +11,11 @@ class IngredientCreateRequest extends CustomFormRequest
     public function rules(): array
     {
         return [
-            'photo_path' 					=> '' ,
-			
+            'photo_path' 					=> 'nullable|string' ,
+
+            'translations' => 'array|required',
+            'translations.*.language_id' => 'integer|required|exists:languages,id,deleted_at,NULL',
+            'translations.*.name' => 'string|required',
         ];
     }
 }

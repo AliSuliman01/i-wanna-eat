@@ -12,13 +12,17 @@ class RestaurantUpdateRequest extends CustomFormRequest
     {
         return [
             'id' => 'required|exists:restaurants,id,deleted_at,NULL',
-            'region_id' => '',
-            'name' => '',
-            'stars' => '',
-            'is_validated_from_us' => '',
-            'open_at' => '',
-            'close_at' => '',
-            'has_family_section' => '',
+            'latitude'              => 'numeric|nullable',
+            'longitude'             => 'numeric|nullable',
+            'name'                  => 'string|nullable',
+            'open_at'               => 'nullable',
+            'close_at'              => 'nullable',
+            'has_family_section'    => 'integer|nullable',
+            'region_id'             => 'integer|nullable|exists:regions,id,deleted_at,NULL',
+
+            'photos'            => 'nullable|array',
+            'photos.*.id'            => 'required|integer|restaurant_photos,id,deleted_at,NULL',
+            'photos.*.file_path'            => 'required|string',
 
         ];
     }

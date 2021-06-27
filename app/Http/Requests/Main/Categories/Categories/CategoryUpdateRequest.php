@@ -12,11 +12,20 @@ class CategoryUpdateRequest extends CustomFormRequest
     {
         return [
             'id' => 'required|exists:categories,id,deleted_at,NULL',
-            'is_verified_from_us' 					=> '' ,
-			'is_offer' 					=> '' ,
-			'discount_percentage' 					=> '' ,
-			'expired_at' 					=> '' ,
-			
+            'is_offer' 					=> 'nullable' ,
+            'discount_percentage' 					=> 'nullable|decimal' ,
+            'expired_at' 					=> 'nullable|string' ,
+
+            'translations' => 'array|nullable',
+            'translations.*.category_id' => 'integer|required|exists:categories,id,deleted_at,NULL',
+            'translations.*.language_id' => 'integer|required|exists:languages,id,deleted_at,NULL',
+            'translations.*.name' => 'string|required',
+            'translations.*.description' => 'string|required',
+
+            'photos' => 'array|nullable',
+            'photos.*.category_id' => 'integer|required|exists:categories,id,deleted_at,NULL',
+            'photos.*.file_path' => 'string|required',
+
         ];
     }
 }

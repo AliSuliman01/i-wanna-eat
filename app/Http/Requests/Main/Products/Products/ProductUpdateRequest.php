@@ -12,11 +12,23 @@ class ProductUpdateRequest extends CustomFormRequest
     {
         return [
             'id' => 'required|exists:products,id,deleted_at,NULL',
-            'is_verified_from_us' 					=> '' ,
-			'category_id' 					=> '' ,
-			'price' 					=> '' ,
-			'restaurant_id' 					=> '' ,
-			
+            'category_id' 					=> 'nullable|integer|exists:categories,id,deleted_at,NULL' ,
+            'price' 					=> 'nullable|decimal' ,
+            'restaurant_id' 					=> 'nullable|integer|exists:restaurants,id,deleted_at,NULL' ,
+
+            'translations'             => 'nullable|array',
+            'translations.*.id'    => 'required|integer|exists:product_translation,id,deleted_at,NULL',
+            'translations.*.language_id'    => 'required|integer|exists:languages,id,deleted_at,NULL',
+            'translations.*.name'    => 'required|string',
+            'translations.*.description'    => 'nullable|string',
+
+            'ingredients'       => 'nullable|array',
+            'ingredients.*'    => 'required|integer|exists:ingredients,id,deleted_at,NULL',
+
+            'photos'            => 'nullable|array',
+            'photos.*.id'            => 'required|integer|product_photos,id,deleted_at,NULL',
+            'photos.*.file_path'            => 'required|string',
+
         ];
     }
 }

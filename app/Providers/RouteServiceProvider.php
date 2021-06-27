@@ -56,6 +56,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapGeneralRoutes('routes/General');
         $this->mapMainRoutes('routes/Main');
+        $this->mapAndroidRoutes('routes/Android');
         $this->mapApiRoutes('routes');
         $this->mapWebRoutes('routes');
     }
@@ -194,6 +195,16 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapServicesRoutes($path.'/Services');
     }
 
+
+
+
+    public function mapAndroidRoutes($path){
+
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/android.php'));
+    }
 
     public function mapApiRoutes($path){
         Route::prefix('api')

@@ -17,7 +17,10 @@ class RestaurantCreateRequest extends CustomFormRequest
             'open_at'               => 'nullable',
             'close_at'              => 'nullable',
             'has_family_section'    => 'integer|nullable',
+            'region_id'             => 'integer|nullable|exists:regions,id,deleted_at,NULL',
 
+            'photos'            => 'nullable|array',
+            'photos.*.file_path'            => 'required|string',
         ];
     }
 }
