@@ -89,7 +89,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->namespace)
-            ->group(base_path($path.'/files.php'));
+            ->group(base_path($path.'/Files/files.php'));
     }
     public function mapRegionsRoutes($path){
         Route::prefix('api')
