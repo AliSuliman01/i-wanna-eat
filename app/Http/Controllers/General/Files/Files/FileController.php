@@ -16,6 +16,7 @@ use App\Http\Requests\General\Files\Files\FileDestroyRequest;
 use App\Http\Requests\General\Files\Files\FileShowRequest;
 use App\Http\ViewModels\General\Files\Files\FileShowVM;
 use App\Http\ViewModels\General\Files\Files\FileIndexVM;
+use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
@@ -32,10 +33,11 @@ class FileController extends Controller
 
     public function create(FileCreateRequest $fileCreateRequest){
 
-        $fileName = $fileCreateRequest->file_name . '_' . time() ;
         $extension = $fileCreateRequest->file->getClientOriginalExtension() ;
-        $store_path = $fileCreateRequest->file('file')->storeAs('/public/'.$fileCreateRequest->file_path ,$fileName.'.'. $extension);
-        $access_path = '/storage/'.$fileCreateRequest->file_path .'/'.$fileName . '.'. $extension ;
+        $fileName = $fileCreateRequest->file_name . '_' . time(). '.'.$extension ;
+        $access_path = '/uploads/'.$fileCreateRequest->file_path .'/'.$fileName  ;
+
+        Storage::disk('public_uploads')->put($fileCreateRequest->file_path.'/'.$fileName, $fileCreateRequest->file('file')->getContent());
 
         $fileDTO = FileDTO::fromRequest([
             'file_name' => $fileName,
