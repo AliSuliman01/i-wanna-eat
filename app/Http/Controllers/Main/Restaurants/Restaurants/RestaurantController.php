@@ -51,15 +51,16 @@ class RestaurantController extends Controller
         $restaurantDTO = RestaurantDTO::fromRequest($data);
         $restaurant = RestaurantUpdateAction::execute($restaurantDTO);
 
-        $restaurantPhotos = [];
-        foreach ($data['photos'] ?? [] as $photo){
-            isset($photo['id']) ?
-                $restaurantPhoto = RestaurantPhotoUpdateAction::execute(RestaurantPhotoDTO::fromRequest($photo)):
-                $restaurantPhoto = RestaurantPhotoCreateAction::execute(RestaurantPhotoDTO::fromRequest($photo + ['restaurant_id' => $restaurant->id]));
-            array_push($restaurantPhotos , $restaurantPhoto->id);
+        if(isset($data['photos'])) {
+            $restaurantPhotos = [];
+            foreach ($data['photos'] ?? [] as $photo) {
+                isset($photo['id']) ?
+                    $restaurantPhoto = RestaurantPhotoUpdateAction::execute(RestaurantPhotoDTO::fromRequest($photo)) :
+                    $restaurantPhoto = RestaurantPhotoCreateAction::execute(RestaurantPhotoDTO::fromRequest($photo + ['restaurant_id' => $restaurant->id]));
+                array_push($restaurantPhotos, $restaurantPhoto->id);
+            }
+            RestaurantPhotosDestroyElseAction::execute($restaurant->id, $restaurantPhotos);
         }
-        RestaurantPhotosDestroyElseAction::execute($restaurant->id,$restaurantPhotos);
-
 
         return response()->json(Helpers::createSuccessResponse((new RestaurantShowVM($restaurant->toArray()))->toArray()));
     }

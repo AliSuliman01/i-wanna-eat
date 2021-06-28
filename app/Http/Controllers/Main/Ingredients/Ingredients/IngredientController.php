@@ -51,15 +51,16 @@ class IngredientController extends Controller
         $ingredientDTO = IngredientDTO::fromRequest($data);
         $ingredient = IngredientUpdateAction::execute($ingredientDTO);
 
-        $ingredientTranslations = [];
-        foreach ($data['translations'] ?? [] as $translation){
-            isset($translation['id']) ?
-                $ingredientTranslation = IngredientTranslationUpdateAction::execute(IngredientTranslationDTO::fromRequest($translation)):
-                $ingredientTranslation = IngredientTranslationCreateAction::execute(IngredientTranslationDTO::fromRequest($translation + ['ingredient_id' => $ingredient->id]));
-            array_push($ingredientTranslations ,$ingredientTranslation->id);
+        if(isset($data['translations'])) {
+            $ingredientTranslations = [];
+            foreach ($data['translations'] ?? [] as $translation) {
+                isset($translation['id']) ?
+                    $ingredientTranslation = IngredientTranslationUpdateAction::execute(IngredientTranslationDTO::fromRequest($translation)) :
+                    $ingredientTranslation = IngredientTranslationCreateAction::execute(IngredientTranslationDTO::fromRequest($translation + ['ingredient_id' => $ingredient->id]));
+                array_push($ingredientTranslations, $ingredientTranslation->id);
+            }
+            IngredientTranslationDestroyElseAction::execute($ingredient->id, $ingredientTranslations);
         }
-        IngredientTranslationDestroyElseAction::execute($ingredient->id,$ingredientTranslations);
-
         return response()->json(Helpers::createSuccessResponse((new IngredientShowVM($ingredient->toArray()))->toArray()));
     }
 

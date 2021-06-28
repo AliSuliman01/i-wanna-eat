@@ -61,25 +61,26 @@ class CategoryController extends Controller
         $category = CategoryUpdateAction::execute($categoryDTO);
 
 
-        $categoryTranslations = [];
-        foreach ($data['translations'] ?? [] as $translation){
-            isset($translation['id']) ?
-                $categoryTranslation = CategoryTranslationUpdateAction::execute(CategoryTranslationDTO::fromRequest($translation)):
-                $categoryTranslation = CategoryTranslationCreateAction::execute(CategoryTranslationDTO::fromRequest($translation + ['category_id' => $category->id]));
-            array_push($categoryTranslations, $categoryTranslation->id);
+        if(isset($data['translations'])) {
+            $categoryTranslations = [];
+            foreach ($data['translations'] ?? [] as $translation) {
+                isset($translation['id']) ?
+                    $categoryTranslation = CategoryTranslationUpdateAction::execute(CategoryTranslationDTO::fromRequest($translation)) :
+                    $categoryTranslation = CategoryTranslationCreateAction::execute(CategoryTranslationDTO::fromRequest($translation + ['category_id' => $category->id]));
+                array_push($categoryTranslations, $categoryTranslation->id);
+            }
+            CategoryTranslationDestroyElseAction::execute($category->id, $categoryTranslations);
         }
-        CategoryTranslationDestroyElseAction::execute($category->id,$categoryTranslations);
-
-
-        $categoryPhotos = [];
-        foreach ($data['photos'] ?? [] as $photo){
-            isset($photo['id']) ?
-            $categoryPhoto = CategoryPhotoUpdateAction::execute(CategoryPhotoDTO::fromRequest($photo)):
-            $categoryPhoto = CategoryPhotoCreateAction::execute(CategoryPhotoDTO::fromRequest($photo + ['category_id' => $category->id]));
-            array_push($categoryPhotos , $categoryPhoto->id);
+        if(isset($data['photos'])) {
+            $categoryPhotos = [];
+            foreach ($data['photos'] ?? [] as $photo) {
+                isset($photo['id']) ?
+                    $categoryPhoto = CategoryPhotoUpdateAction::execute(CategoryPhotoDTO::fromRequest($photo)) :
+                    $categoryPhoto = CategoryPhotoCreateAction::execute(CategoryPhotoDTO::fromRequest($photo + ['category_id' => $category->id]));
+                array_push($categoryPhotos, $categoryPhoto->id);
+            }
+            CategoryPhotoDestroyElseAction::execute($category->id, $categoryPhotos);
         }
-        CategoryPhotoDestroyElseAction::execute($category->id,$categoryPhotos);
-
         return response()->json(Helpers::createSuccessResponse((new CategoryShowVM($category->toArray()))->toArray()));
     }
 

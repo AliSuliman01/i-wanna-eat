@@ -28,65 +28,74 @@ use App\Http\ViewModels\Main\Products\Products\ProductIndexVM;
 class ProductController extends Controller
 {
 
-    public function index(){
+    public function index()
+    {
 
         return response()->json(Helpers::createSuccessResponse((new ProductIndexVM())->toArray()));
     }
 
-    public function show(ProductShowRequest $productShowRequest){
+    public function show(ProductShowRequest $productShowRequest)
+    {
 
         return response()->json(Helpers::createSuccessResponse((new ProductShowVM(['id' => $productShowRequest->route('id')]))->toArray()));
     }
 
-    public function create(ProductCreateRequest $productCreateRequest){
-        $data = $productCreateRequest->validated() ;
+    public function create(ProductCreateRequest $productCreateRequest)
+    {
+        $data = $productCreateRequest->validated();
         $productDTO = ProductDTO::fromRequest($data);
         $product = ProductCreateAction::execute($productDTO);
 
 
-        foreach ($data['translations'] as $translation){
+        foreach ($data['translations'] as $translation) {
             ProductTranslationCreateAction::execute(ProductTranslationDTO::fromRequest($translation + ['product_id' => $product->id]));
         }
 
         $product->ingredients()->attach($data['ingredients']);
 
-        foreach ($data['photos'] ?? [] as $photo){
+        foreach ($data['photos'] ?? [] as $photo) {
             ProductPhotoCreateAction::execute(ProductPhotoDTO::fromRequest($photo + ['product_id' => $product->id]));
         }
 
         return response()->json(Helpers::createSuccessResponse((new ProductShowVM($product->toArray()))->toArray()));
     }
 
-    public function update(ProductUpdateRequest $productUpdateRequest){
-        $data = $productUpdateRequest->validated() ;
+    public function update(ProductUpdateRequest $productUpdateRequest)
+    {
+        $data = $productUpdateRequest->validated();
         $productDTO = ProductDTO::fromRequest($data);
         $product = ProductUpdateAction::execute($productDTO);
 
+        if (isset($data['translations'])) {
 
-        $productTranslations = [];
-        foreach ($data['translations'] ?? [] as $translation){
-            isset($translation['id']) ?
-                $productTranslation = ProductTranslationUpdateAction::execute(ProductTranslationDTO::fromRequest($translation)):
-                $productTranslation = ProductTranslationCreateAction::execute(ProductTranslationDTO::fromRequest($translation + ['product_id' => $product->id]));
-            array_push($productTranslations , $productTranslation->id);
+            $productTranslations = [];
+            foreach ($data['translations'] ?? [] as $translation) {
+                isset($translation['id']) ?
+                    $productTranslation = ProductTranslationUpdateAction::execute(ProductTranslationDTO::fromRequest($translation)) :
+                    $productTranslation = ProductTranslationCreateAction::execute(ProductTranslationDTO::fromRequest($translation + ['product_id' => $product->id]));
+                array_push($productTranslations, $productTranslation->id);
+            }
+            ProductTranslationDestroyElseAction::execute($product->id, $productTranslations);
         }
-        ProductTranslationDestroyElseAction::execute($product->id,$productTranslations);
-
-        $product->ingredients()->sync($data['ingredients']);
-
-        $productPhotos = [];
-        foreach ($data['photos'] ?? [] as $photo){
-            isset($photo['id']) ?
-                $productPhoto = ProductPhotoUpdateAction::execute(ProductPhotoDTO::fromRequest($photo)):
-                $productPhoto = ProductPhotoCreateAction::execute(ProductPhotoDTO::fromRequest($photo + ['product_id' => $product->id]));
-            array_push($productPhotos , $productPhoto->id);
+        if (isset($data['ingredients'])) {
+            $product->ingredients()->sync($data['ingredients']);
         }
-        ProductPhotoDestroyElseAction::execute($product->id,$productPhotos);
+        if (isset($data['photos'])) {
+            $productPhotos = [];
+            foreach ($data['photos'] ?? [] as $photo) {
+                isset($photo['id']) ?
+                    $productPhoto = ProductPhotoUpdateAction::execute(ProductPhotoDTO::fromRequest($photo)) :
+                    $productPhoto = ProductPhotoCreateAction::execute(ProductPhotoDTO::fromRequest($photo + ['product_id' => $product->id]));
+                array_push($productPhotos, $productPhoto->id);
+            }
+            ProductPhotoDestroyElseAction::execute($product->id, $productPhotos);
+        }
 
         return response()->json(Helpers::createSuccessResponse((new ProductShowVM($product->toArray()))->toArray()));
     }
 
-    public function destroy(ProductDestroyRequest $productDestroyRequest){
+    public function destroy(ProductDestroyRequest $productDestroyRequest)
+    {
 
         return response()->json(Helpers::createSuccessResponse(ProductDestroyAction::execute(ProductDTO::fromRequest($productDestroyRequest->validated()))));
     }
