@@ -85,6 +85,12 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path($path.'/languages.php'));
     }
+    public function mapFilesRoutes($path){
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path($path.'/files.php'));
+    }
     public function mapRegionsRoutes($path){
         Route::prefix('api')
             ->middleware('api')
@@ -107,6 +113,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapUsersRoutes($path.'/Users');
         $this->mapLanguagesRoutes($path.'/Languages');
         $this->mapRegionsRoutes($path.'/Regions');
+        $this->mapFilesRoutes($path.'/Files');
     }
 
 
