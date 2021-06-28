@@ -7,10 +7,10 @@ Route::group(['namespace' => 'App\Http\Controllers\General\Files\Files', 'prefix
 	function () {
 		Route::get('', [FileController::class,'index']);
 		Route::get('show/{id}', [FileController::class,'show']);
+        Route::post('upload', [FileController::class,'create']);
 		Route::group([
 			'middleware' => ['auth:api']
 		], function () {
-			Route::post('upload', [FileController::class,'create']);
 			Route::post('destroy', [FileController::class,'destroy']);
 		});
 	});
