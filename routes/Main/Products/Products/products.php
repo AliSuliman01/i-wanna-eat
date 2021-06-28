@@ -7,11 +7,11 @@ Route::group(['namespace' => 'App\Http\Controllers\Main\Products\Products', 'pre
 	function () {
 		Route::get('', [ProductController::class,'index']);
 		Route::get('show/{id}', [ProductController::class,'show']);
-		Route::group([
-			'middleware' => ['auth:api']
-		], function () {
 			Route::post('create', [ProductController::class,'create']);
 			Route::post('update', [ProductController::class,'update']);
 			Route::post('destroy', [ProductController::class,'destroy']);
+		Route::group([
+			'middleware' => ['auth:api']
+		], function () {
 		});
 	});

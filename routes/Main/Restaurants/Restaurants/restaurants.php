@@ -7,11 +7,11 @@ Route::group(['namespace' => 'App\Http\Controllers\Content\Restaurants\Restauran
 	function () {
 		Route::get('', [RestaurantController::class,'index']);
 		Route::get('show/{id}', [RestaurantController::class,'show']);
-		Route::group([
-			'middleware' => ['auth:api']
-		], function () {
 			Route::post('create', [RestaurantController::class,'create']);
 			Route::post('update', [RestaurantController::class,'update']);
 			Route::post('destroy', [RestaurantController::class,'destroy']);
+		Route::group([
+			'middleware' => ['auth:api']
+		], function () {
 		});
 	});
