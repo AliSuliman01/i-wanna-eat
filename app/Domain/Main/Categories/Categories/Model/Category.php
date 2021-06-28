@@ -32,7 +32,8 @@ class Category extends Model
         public function translations(){
             return $this->belongsToMany(Language::class,'category_translation')
                         ->using(CategoryTranslation::class)
-                        ->wherePivot('deleted_at',null);
+                        ->wherePivot('deleted_at',null)
+                        ->withPivot(['name','description']);
         }
         public function photos(){
             return $this->hasMany(CategoryPhoto::class);

@@ -31,6 +31,7 @@ class Ingredient extends Model
         public function translations(){
             return $this->belongsToMany(Language::class,'ingredient_translation')
                         ->using(IngredientTranslation::class)
-                        ->wherePivot('deleted_at',null);
+                        ->wherePivot('deleted_at',null)
+                        ->withPivot(['name']);
         }
 }
