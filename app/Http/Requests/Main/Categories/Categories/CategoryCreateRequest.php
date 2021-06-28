@@ -18,7 +18,7 @@ class CategoryCreateRequest extends CustomFormRequest
             'translations' => 'array|required',
             'translations.*.language_id' => 'integer|required|exists:languages,id,deleted_at,NULL',
             'translations.*.name' => 'string|required',
-            'translations.*.description' => 'string|required',
+            'translations.*.description' => 'string|nullable',
 
             'photos' => 'array|required',
             'photos.*.photo_path' => 'string|required'
