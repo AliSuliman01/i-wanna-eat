@@ -51,6 +51,7 @@ class ProductController extends Controller
             ProductTranslationCreateAction::execute(ProductTranslationDTO::fromRequest($translation + ['product_id' => $product->id]));
         }
 
+        if(isset($data['ingredients']))
         $product->ingredients()->attach($data['ingredients']);
 
         foreach ($data['photos'] ?? [] as $photo) {
