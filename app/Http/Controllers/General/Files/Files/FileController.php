@@ -37,7 +37,7 @@ class FileController extends Controller
         $fileName = $fileCreateRequest->file_name . '_' . time(). '.'.$extension ;
         $access_path = '/uploads/'.$fileCreateRequest->file_path .'/'.$fileName  ;
 
-        Storage::disk('public_uploads')->put($fileCreateRequest->file_path.'/'.$fileName, $fileCreateRequest->file('file')->getContent());
+        Storage::disk('google')->put($fileName, $fileCreateRequest->file('file')->getContent());
 
         $fileDTO = FileDTO::fromRequest([
             'file_name' => $fileName,
