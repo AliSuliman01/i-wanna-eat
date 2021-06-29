@@ -13,7 +13,7 @@ class ProductUpdateRequest extends CustomFormRequest
         return [
             'id' => 'required|exists:products,id,deleted_at,NULL',
             'category_id' 					=> 'nullable|integer|exists:categories,id,deleted_at,NULL' ,
-            'price' 					=> 'nullable|decimal' ,
+            'price' 					=> 'nullable|numeric' ,
             'restaurant_id' 					=> 'nullable|integer|exists:restaurants,id,deleted_at,NULL' ,
 
             'translations'             => 'nullable|array',

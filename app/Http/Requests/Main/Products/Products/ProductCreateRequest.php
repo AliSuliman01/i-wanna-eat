@@ -12,7 +12,7 @@ class ProductCreateRequest extends CustomFormRequest
     {
         return [
 			'category_id' 					=> 'required|integer|exists:categories,id,deleted_at,NULL' ,
-			'price' 					=> 'required|decimal' ,
+			'price' 					=> 'required|numeric' ,
 			'restaurant_id' 					=> 'required|integer|exists:restaurants,id,deleted_at,NULL' ,
 
             'translations'             => 'required|array',
