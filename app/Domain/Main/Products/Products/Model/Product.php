@@ -9,6 +9,7 @@ use App\Domain\Main\Products\ProductPhotos\Model\ProductPhoto;
 use App\Domain\Main\Products\ProductTranslation\Model\ProductTranslation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Concerns\AsPivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model

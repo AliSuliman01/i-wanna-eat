@@ -3,6 +3,8 @@
 namespace App\Domain\Main\Restaurants\Restaurants\Model;
 
 use App\Domain\General\Regions\Regions\Model\Region;
+use App\Domain\Main\Categories\Categories\Model\Category;
+use App\Domain\Main\Products\Products\Model\Product;
 use App\Domain\Main\Restaurants\RestaurantPhotos\Model\RestaurantPhoto;
 use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -34,5 +36,9 @@ class Restaurant extends Model
         }
         public function photos(){
             return $this->hasMany(RestaurantPhoto::class);
+        }
+        public function categories(){
+            return $this->belongsToMany(Category::class,'products')
+                        ->wherePivot('deleted_at',null)->distinct();
         }
 }
