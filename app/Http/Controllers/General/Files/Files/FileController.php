@@ -19,6 +19,23 @@ use App\Http\ViewModels\General\Files\Files\FileIndexVM;
 use Illuminate\Support\Facades\Storage;
 use League\Flysystem\Filesystem;
 
+class GoogleDriveFile {
+
+    var $type, $name, $subject, $path, $filename, $extension, $timestamp, $mimetype, $size, $dirname, $basename;
+
+    public function __construct($data) {
+        $this->name = $data['name'];
+        $this->type = $data['type'];
+        $this->path = $data['path'];
+        $this->filename = $data['filename'];
+        $this->extension = $data['extension'];
+        $this->timestamp = $data['timestamp'];
+        $this->mimetype = $data['mimetype'];
+        $this->size = $data['size'];
+        $this->dirname = $data['dirname'];
+        $this->basename = $data['basename'];
+    }
+}
 class FileController extends Controller
 {
 
@@ -34,9 +51,11 @@ class FileController extends Controller
     public function create(FileCreateRequest $fileCreateRequest){
 
         $extension = $fileCreateRequest->file->getClientOriginalExtension() ;
-        $fileName = $fileCreateRequest->file_name . '_' . time(). '.'.$extension ;
+
+        $fileName = time() . '_' . $fileCreateRequest->file_name . '.'.$extension ;
 
         $disk = Storage::disk('google');
+
         $disk->put($fileName, $fileCreateRequest->file('file')->getContent());
 
         $access_path = config('prefixes.google_drive_prefix').$disk->listContents()[count($disk->listContents())-1]['path'] ;
