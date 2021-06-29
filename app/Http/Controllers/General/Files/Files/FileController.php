@@ -17,13 +17,13 @@ use App\Http\Requests\General\Files\Files\FileShowRequest;
 use App\Http\ViewModels\General\Files\Files\FileShowVM;
 use App\Http\ViewModels\General\Files\Files\FileIndexVM;
 use Illuminate\Support\Facades\Storage;
+use League\Flysystem\Filesystem;
 
 class FileController extends Controller
 {
 
     public function index(){
-
-        return response()->json(Helpers::createSuccessResponse((new FileIndexVM())->toArray()));
+        return response()->json(Helpers::createSuccessResponse(( new FileIndexVM())->toArray()));
     }
 
     public function show(FileShowRequest $fileShowRequest){
@@ -35,9 +35,11 @@ class FileController extends Controller
 
         $extension = $fileCreateRequest->file->getClientOriginalExtension() ;
         $fileName = $fileCreateRequest->file_name . '_' . time(). '.'.$extension ;
-        $access_path = '/uploads/'.$fileCreateRequest->file_path .'/'.$fileName  ;
 
-        Storage::disk('google')->put($fileName, $fileCreateRequest->file('file')->getContent());
+        $disk = Storage::disk('google');
+        $disk->put($fileName, $fileCreateRequest->file('file')->getContent());
+
+        $access_path = config('prefixes.google_drive_prefix').$disk->listContents()[count($disk->listContents())-1]['path'] ;
 
         $fileDTO = FileDTO::fromRequest([
             'file_name' => $fileName,
