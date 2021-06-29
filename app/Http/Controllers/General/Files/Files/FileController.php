@@ -40,7 +40,7 @@ class FileController extends Controller
 {
 
     public function index(){
-        return response()->json(Helpers::createSuccessResponse(( new FileIndexVM())->toArray()));
+        return response()->json(Helpers::createSuccessResponse((new FileIndexVM())->toArray()));
     }
 
     public function show(FileShowRequest $fileShowRequest){
@@ -52,13 +52,22 @@ class FileController extends Controller
 
         $extension = $fileCreateRequest->file->getClientOriginalExtension() ;
 
-        $fileName = 'file'.time() . '_' . $fileCreateRequest->file_name . '.'.$extension ;
+        $fileName =  $fileCreateRequest->file_name . '_' .time() . '.'.$extension ;
 
         $disk = Storage::disk('google');
 
         $disk->put($fileName, $fileCreateRequest->file('file')->getContent());
 
-        $access_path = config('prefixes.google_drive_prefix').$disk->listContents()[count($disk->listContents())-1]['path'] ;
+        $path = null ;
+
+        foreach ($disk->listContents() as $file){
+            if($file['name'] == $fileName){
+                $path = $file['path'];
+                break ;
+            }
+        }
+
+        $access_path = config('prefixes.google_drive_prefix').$path ;
 
         $fileDTO = FileDTO::fromRequest([
             'file_name' => $fileName,
