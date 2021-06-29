@@ -52,7 +52,7 @@ class FileController extends Controller
 
         $extension = $fileCreateRequest->file->getClientOriginalExtension() ;
 
-        $fileName = time() . '_' . $fileCreateRequest->file_name . '.'.$extension ;
+        $fileName = 'file'.time() . '_' . $fileCreateRequest->file_name . '.'.$extension ;
 
         $disk = Storage::disk('google');
 
