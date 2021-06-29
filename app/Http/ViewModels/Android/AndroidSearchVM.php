@@ -23,12 +23,12 @@ class AndroidSearchVM implements Arrayable
     }
     public function get_products(){
         return Product::with(['translations','photos'])->whereHas('translations',function ($translation){
-            $translation->where('name','LIKE',"%$this->sub_string%");
+            $translation->where('product_translation.name','LIKE',"%$this->sub_string%");
         })->get();
     }
     public function get_categories(){
         return Category::with(['translations','photos'])->whereHas('translations',function ($translation){
-                $translation->where('name','LIKE',"%$this->sub_string%");
+                $translation->where('category_translation.name','LIKE',"%$this->sub_string%");
             })->get();
     }
     public function toArray()
