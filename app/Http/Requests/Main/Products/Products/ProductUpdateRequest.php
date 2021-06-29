@@ -23,7 +23,7 @@ class ProductUpdateRequest extends CustomFormRequest
             'translations.*.description'    => 'nullable|string',
 
             'ingredients'       => 'nullable|array',
-            'ingredients.*'    => 'required|integer|exists:ingredients,id,deleted_at,NULL',
+            'ingredients.*'    => 'nullable|integer|exists:ingredients,id,deleted_at,NULL',
 
             'photos'            => 'nullable|array',
             'photos.*.id'            => 'nullable|integer|exists:product_photos,id,deleted_at,NULL',

@@ -40,7 +40,7 @@ class IngredientController extends Controller
         $ingredient = IngredientCreateAction::execute($ingredientDTO);
 
         foreach ($data['translations'] as $translation){
-            IngredientTranslationCreateAction::execute(IngredientTranslationDTO::fromRequest($translation + ['$ingredient_id' => $ingredient->id]));
+            IngredientTranslationCreateAction::execute(IngredientTranslationDTO::fromRequest($translation + ['ingredient_id' => $ingredient->id]));
         }
 
         return response()->json(Helpers::createSuccessResponse((new IngredientShowVM($ingredient->toArray()))->toArray()));
