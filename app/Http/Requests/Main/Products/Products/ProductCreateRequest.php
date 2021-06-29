@@ -20,8 +20,8 @@ class ProductCreateRequest extends CustomFormRequest
             'translations.*.name'    => 'required|string',
             'translations.*.description'    => 'nullable|string',
 
-            'ingredients'       => 'required|array',
-            'ingredients.*'    => 'required|integer|exists:ingredients,id,deleted_at,NULL',
+            'ingredients'       => 'nullable|array',
+            'ingredients.*'    => 'nullable|integer|exists:ingredients,id,deleted_at,NULL',
 
             'photos'            => 'required|array',
             'photos.*.photo_path'            => 'required|string',
