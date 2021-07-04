@@ -19,16 +19,16 @@ class AndroidSearchVM implements Arrayable
     }
 
     public function get_restaurants(){
-        return Restaurant::with(['photos'])->where('name','like',"%$this->sub_string%")->get();
+        return Restaurant::with(['photos'])->whereRaw('LOWER(name) LIKE ?',['%'.trim(strtolower($this->sub_string)).'%'])->get();
     }
     public function get_products(){
         return Product::with(['translations','photos'])->whereHas('translations',function ($translation){
-            $translation->where('product_translation.name','like',"%$this->sub_string%");
+            $translation->whereRaw('LOWER(product_translation.name) LIKE ?',['%'.trim(strtolower($this->sub_string)).'%']);
         })->get();
     }
     public function get_categories(){
         return Category::with(['translations','photos'])->whereHas('translations',function ($translation){
-                $translation->where('category_translation.name','like',"%$this->sub_string%");
+                $translation->whereRaw('LOWER(category_translation.name) LIKE ?',['%'.trim(strtolower($this->sub_string)).'%']);
             })->get();
     }
     public function toArray()
